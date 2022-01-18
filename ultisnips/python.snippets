@@ -1,0 +1,15 @@
+# -----------------------------------------------------------
+# => Python 
+# -----------------------------------------------------------
+# Lambda
+snippet ld "lambda x: f(x)" i
+lambda ${1:x}: ${0:action}
+endsnippet
+
+snippet lde "lambda x: x.foo == bar" i
+lambda ${1:x}: $1.${2:var} ${3:==} ${0:comparsion}
+endsnippet
+
+snippet ldf "v = lambda x: f(x)" i 
+${1:var} = lambda ${2:vars}: ${0:action}
+endsnippet

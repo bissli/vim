@@ -1,0 +1,56 @@
+priority -60
+
+# -----------------------------------------------------------
+# => Helpers
+# -----------------------------------------------------------
+global !p
+
+from vimsnippets import get_comment_format
+
+def past_weekday(fmt):
+	from datetime import date, timedelta
+	pdate = date.today() - timedelta(days=1)
+	dnum = pdate.weekday()
+	if dnum in (5, 6):
+		pdate =  pdate - timedelta(days=dnum - 4)
+	return pdate.strftime(fmt)
+
+endglobal
+
+# -----------------------------------------------------------
+# => Dates
+# -----------------------------------------------------------
+snippet pd "YYYY-MM-DD" i
+`!p snip.rv = t[1]``!p snip.rv = past_weekday("%Y-%m-%d")`${1:'} $0
+endsnippet
+
+snippet td "YYYY-MM-DD" "not re.match('<', snip.buffer[snip.line-1])" ie
+`!p snip.rv = t[1]``!v strftime("%Y-%m-%d")`${1:'} $0
+endsnippet
+
+snippet dd "Month DD, YYYY" w
+`!p snip.rv = t[1]``!v strftime("%b %d, %Y")`${1:'} $0
+endsnippet
+
+snippet di "ISO format datetime" w
+`!v strftime("%Y-%m-%d %H:%M:%S%z")`
+endsnippet
+
+snippet t "hh:mm" w
+`!v strftime("%H:%M")`
+endsnippet
+
+snippet dt "YYYY-MM-DD hh:mm" w
+`!v strftime("%Y-%m-%d %H:%M")`
+endsnippet
+
+snippet todo "TODO comment" bw
+`!p snip.rv=get_comment_format()[0]` ${2:TODO}: $0${3: <${4:`!v strftime('%m/%d/%y')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
+endsnippet
+
+# -----------------------------------------------------------
+# general
+# -----------------------------------------------------------
+snippet lbr "line break" bw
+=========================================== [`!p snip.rv = t[1]``!v strftime("%Y-%m-%d")`]
+endsnippet
