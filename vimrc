@@ -410,3 +410,7 @@ nnoremap <leader>jj :%s/<c-r>=expand("<cword>")<cr>/
 nnoremap <leader>co :botright copen<cr>
 nnoremap <leader>cx :cclose<cr>
 autocmd BufWinEnter quickfix nnoremap <silent><buffer>q :cclose<cr>:lclose<cr>
+" push quickfix window always to the bottom
+autocmd FileType qf wincmd J
+" Make sure that enter is never overriden in the quickfix window
+autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
