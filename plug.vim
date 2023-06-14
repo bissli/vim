@@ -63,6 +63,8 @@ Plug 'klafyvel/vim-slime-cells', {'for': ['r', 'python'] }
 Plug 'tpope/vim-sleuth' " will need editorconfig file
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
 Plug 'jalvesaq/R-Vim-runtime', { 'for': ['r'] }
+Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
 " markdown
 Plug 'preservim/vim-markdown'
 " buffers
