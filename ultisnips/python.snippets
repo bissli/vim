@@ -1,6 +1,23 @@
 # -----------------------------------------------------------
-# => Python 
+# => Helpers
 # -----------------------------------------------------------
+global !p
+
+SINGLE_QUOTES = "'"
+DOUBLE_QUOTES = '"'
+
+def get_quoting_style(snip):
+	style = snip.opt("g:ultisnips_python_quoting_style", "double")
+	if style == 'single':
+		return SINGLE_QUOTES
+	return DOUBLE_QUOTES
+
+endglobal
+
+# -----------------------------------------------------------
+# => Misc 
+# -----------------------------------------------------------
+
 # Lambda
 snippet ld "lambda x: f(x)" i
 lambda ${1:x}: ${0:action}
@@ -12,4 +29,27 @@ endsnippet
 
 snippet ldf "v = lambda x: f(x)" i 
 ${1:var} = lambda ${2:vars}: ${0:action}
+endsnippet
+
+# jupyter / slime
+snippet lbr "slime/jupyter cell" i
+# %%
+${0}
+endsnippet
+
+# Write to file
+snippet we "Write collection to Excel" i
+import os; ${1:pos}.write_excel(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.xlsx'));$0
+endsnippet
+
+snippet wf "Write text to file" i
+import os
+with open(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.${4:txt}'), 'w+') as f:
+	f.write(${1:thename})
+$0
+endsnippet
+
+snippet iftest "iftest" b
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	__import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).test_mod() 
 endsnippet

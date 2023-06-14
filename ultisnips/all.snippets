@@ -8,11 +8,15 @@ global !p
 from vimsnippets import get_comment_format
 
 def past_weekday(fmt):
-	from datetime import date, timedelta
-	pdate = date.today() - timedelta(days=1)
-	dnum = pdate.weekday()
-	if dnum in (5, 6):
-		pdate =  pdate - timedelta(days=dnum - 4)
+	try:
+		from tc import date
+		pdate = date.to_date('P')
+	except:
+		from datetime import date, timedelta
+		pdate = date.today() - timedelta(days=1)
+		dnum = pdate.weekday()
+		if dnum in (5, 6):
+			pdate =  pdate - timedelta(days=dnum - 4)
 	return pdate.strftime(fmt)
 
 endglobal
