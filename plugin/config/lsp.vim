@@ -7,10 +7,10 @@ let g:lsp_preview_float = 0
 let g:lsp_signature_help_enabled = 0
 let g:lsp_semantic_enabled = 1
 let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand($HOME . '/.vim/vim-lsp.log')
+let g:lsp_log_file = expand($HOME.'/.vim/vim-lsp.log')
 " vim-lsp-settings options
-let g:lsp_settings_servers_dir = expand($HOME . '/.vim/servers/')
-let g:lsp_settings_global_settings_dir = expand($HOME . '/.config/vim-lsp/')
+let g:lsp_settings_servers_dir = expand($HOME.'/.vim/servers/')
+let g:lsp_settings_global_settings_dir = expand($HOME.'/.config/vim-lsp/')
 let g:lsp_settings_root_markers = ['.fzf', '.root']
 let g:lsp_settings_enable_suggestions = 0
 " asyncomplete options

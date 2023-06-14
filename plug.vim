@@ -1,4 +1,4 @@
-if empty(glob(expand($HOME . '/.vim/autoload/plug.vim')))
+if empty(glob(expand($HOME.'/.vim/autoload/plug.vim')))
     if has('win32') || has('win64')
         silent ! iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
             ni $HOME/vimfiles/autoload/plug.vim -Force
@@ -7,11 +7,11 @@ if empty(glob(expand($HOME . '/.vim/autoload/plug.vim')))
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     endif
     autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-        \| PlugInstall --sync | source $MYVIMRC
+        \| PlugInstall --sync | source expand($HOME.'/.vimrc')
         \| endif
 endif
 
-call plug#begin($HOME.'/.vim/plugged')
+call plug#begin(expand($HOME.'/.vim/plugged'))
 
 " layout
 Plug 'bissli/inkpot'
@@ -79,7 +79,7 @@ call plug#end()
 func! g:PlugLoaded(name)
     return (
         \ has_key(g:plugs, a:name) &&
-        \ isdirectory(g:plugs[a:name].dir)
+        \ isdirectory(g:plugs[a:name].dir) &&
+        \ stridx(&rtp, substitute(g:plugs[a:name].dir, "\/$", "", "")) >= 0
 	\ )
 endfunc
-" stridx(&rtp, g:plugs[a:name].dir) >= 0)
