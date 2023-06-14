@@ -22,4 +22,5 @@ function! TabLine()
   let s .= '%#TabLineFill#'
   return s
 endfunction
+
 set tabline=%!TabLine()
