@@ -343,10 +343,8 @@ au BufFilePost * exe "CloseDupTabs"
 " <C-w><C-w> to toggle splits
 " <C-w>| or <c-w>_ to maximize
 " <C-w>= for even spacing
-map <silent><leader>t :term ++close<cr>
-tmap <silent><leader>t <c-w>:term ++close<cr>
-map <silent><leader>T :botright vert term ++close<cr>
-tmap <silent><leader>T <c-w>:botright vert term ++close<cr>
+map <silent><leader>t :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>clear<cr>
+tmap <silent><leader>t :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
 
 " Git
 nnoremap <leader>gb :Git blame<cr>
