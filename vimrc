@@ -33,6 +33,7 @@ set autoread                                                             | " Rel
 set history=1000                                                         | " Store lots of :cmdline history
 set updatetime=100                                                       | " ??
 set completeopt+=menu,popup,menuone,noselect,noinsert,longest
+set previewheight=15
 " set completeopt=menuone,noinsert,noselect,preview                      | " enable preview window
 set noswapfile                                                           | " No swap file
 set nobackup                                                             | " No backup

@@ -191,3 +191,11 @@ if executable(g:jedi_language_server_path)
 	    \ },
 	    \ })
 endif
+
+func! PreviewHeightWorkAround()
+    if &previewwindow
+        exec 'setlocal winheight='.&previewheight
+    endif
+endfunc
+
+au BufEnter ?* call PreviewHeightWorkAround()
