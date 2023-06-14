@@ -1,8 +1,5 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Layout functions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set tabline to tabnr:bufname:bufmodified
-function! Tabline()
+function! TabLine()
   let s = ''
   for i in range(tabpagenr('$'))
     let tab = i + 1
@@ -25,3 +22,4 @@ function! Tabline()
   let s .= '%#TabLineFill#'
   return s
 endfunction
+set tabline=%!TabLine()
