@@ -261,19 +261,6 @@ au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 au BufWritePre *.txt,*.py,*.js,*.sh,*.coffee,*.sql,*.vim,vimrc :call CleanExtraSpaces()
 
-" ---------------------------------------------------------------
-" Shell section
-" ---------------------------------------------------------------
-" os specific shell
-if has('win32') || has('win64')
-  set shell=powershell
-  set shellcmdflag=-command
-  set ff=dos
-else
-  set shell=/bin/bash
-  set ff=unix
-endif
-
 " Folding
 
 " Cheatsheet
