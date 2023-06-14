@@ -17,7 +17,6 @@ call plug#begin(expand($HOME.'/.vim/plugged'))
 Plug 'bissli/inkpot'
 Plug 'vim-scripts/colorsupport.vim'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'wesQ3/vim-windowswap'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'bissli/vim-close-duplicate-tabs'
 " mappings

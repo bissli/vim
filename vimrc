@@ -258,6 +258,7 @@ au BufRead /tmp/psql.edit.* set filetype=sql
 au BufRead /tmp/ssql.edit.* set filetype=sql
 au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
+au BufRead,BufNewFile *.ipynb set filetype=python
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 au BufWritePre *.txt,*.py,*.js,*.sh,*.coffee,*.sql,*.vim,vimrc :call CleanExtraSpaces()
 
@@ -338,11 +339,17 @@ nmap <Leader>tl :exe "tabn ".g:lasttab<cr>
 au TabLeave * let g:lasttab = tabpagenr()
 au BufFilePost * exe "CloseDupTabs"
 
-" Tags
-nnoremap <leader>t :Tags<cr>
+" Terminal
+" <C-w><C-w> to toggle splits
+" <C-w>| or <c-w>_ to maximize
+" <C-w>= for even spacing
+map <silent><leader>t :term ++close<cr>
+tmap <silent><leader>t <c-w>:term ++close<cr>
+map <silent><leader>T :botright vert term ++close<cr>
+tmap <silent><leader>T <c-w>:botright vert term ++close<cr>
 
 " Git
-nnoremap <Leader>gb :Git blame<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gL :call GitCommand("lg")<cr>
 nnoremap <leader>gl :call GitCommand("log")<cr>
 nnoremap <leader>gr :call GitCommand("reflog")<cr>
@@ -358,11 +365,11 @@ if ! &diff
 	nmap [c <Plug>(GitGutterPrevHunk)
 endif
 
-" Window Swap
-let g:windowswap_map_keys = 0
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<cr>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<cr>
-nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<cr>
+" " Window Swap
+" let g:windowswap_map_keys = 0
+" nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<cr>
+" nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<cr>
+" nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<cr>
 
 " Format
 nnoremap <silent><leader>ff :ALEFix<cr>
