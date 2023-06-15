@@ -375,7 +375,7 @@ endif
 
 " Format
 nnoremap <silent><leader>jf :ALEFix<cr>
-nnoremap <leader>jt :ALEToggle<cr>
+nnoremap <leader>jF :ALEToggle<cr>
 
 " Grep
 nnoremap <leader>jl :call GrepDoc()<cr>
