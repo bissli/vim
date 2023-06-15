@@ -144,7 +144,19 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 " https://github.com/prabirshrestha/asyncomplete-buffer.vim/issues/17
 autocmd VimEnter * :doautocmd BufWinEnter
 
-let g:lsp_settings_filetype_python = ['jedi-language-server~', 'pylsp~']
+let directories=glob(fnameescape(g:lsp_settings_servers_dir).'/{,.}*/', 1, 1)
+call map(directories, 'fnamemodify(v:val, ":h:t")')
+
+let g:lsp_settings_filetype_python = []
+
+if index(directories, 'jedi-language-server') != -1
+  call add(g:lsp_settings_filetype_python, 'jedi-language-server~')
+endif
+
+if index(directories, 'pylsp') != -1
+  call add(g:lsp_settings_filetype_python, 'pylsp~')
+endif
+
 let g:jedi_language_server_path = g:lsp_settings_servers_dir . 'jedi-language-server/jedi-language-server'
 
 if executable('pylsp~DISABLE')
