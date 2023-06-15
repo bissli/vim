@@ -1,9 +1,3 @@
-" to run as jupyter:
-" nohup jupyter console &
-" jupyter console --existing
-" in another terminal (if desired):
-" jupyter qtconsole --existing
-
 let g:slime_target = "vimterminal"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_paste_file = expand($HOME . '/.slime_paste')
@@ -17,6 +11,7 @@ au FileType r let b:slime_vimterminal_cmd = "r"
 
 func! SlimeMappings()
 	nmap <silent><leader>se <Plug>SlimeCellsSendAndGoToNext
+  xmap <silent><leader>se <Plug>SlimeRegionSend
 	nmap <silent><leader>t :botright vert term ++close<cr>ipython<cr>%clear<cr><C-w><C-w><Plug>SlimeConfig
 endfunc
 
