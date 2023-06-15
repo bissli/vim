@@ -32,10 +32,10 @@ cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'L
 
 func! GrepDoc()
 	" Search word under cursor
-	silent execute "Grep ".expand('<cword>')." ".expand('%') | :cw
+	silent! execute "Grep ".expand('<cword>')." ".expand('%') | :cw
 endfunc
 
 func! GrepWs()
 	" Search word under cursor
-	silent execute "Grep ".expand('<cword>')
+	silent! execute "Grep ".expand('<cword>')
 endfunc
