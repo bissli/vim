@@ -21,12 +21,12 @@ set runtimepath=$HOME/.vim,$VIMRUNTIME
 " ---------------------------------------------------------------
 " Load vim files
 " ---------------------------------------------------------------
-runtime defaults.vim
 runtime plug.vim
 
 " ---------------------------------------------------------------
 " General config
 " ---------------------------------------------------------------
+set nocompatible                                                         | " disable legacy compatibility
 set encoding=utf-8                                                       | " Set utf8 as standard encoding
 set fileformats=unix,dos,mac                                             | " Use Unix as the standard file type
 set autoread                                                             | " Reload files changed outside vim
@@ -48,28 +48,34 @@ set wildignore=*.o,*~,*.pyc,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 set cmdheight=2
 set hidden                                                               | " Allow buffers to exist in the background
 set whichwrap+=<,>,h,l
+set backspace=indent,eol,start
 set magic                                                                | " re
+set ruler                                                                | " show the cursor position all the time
 set showmatch                                                            | " Briefly jump to a paren once it's balanced
 set matchtime=2                                                          | " (for only .2 seconds)
 set noerrorbells                                                         | " No sounds
 set novisualbell                                                         | " No sounds
 set belloff=all                                                          | " No sounds
 set t_vb=
+set ttimeout                                                             | " time out for key codes
 set ttimeoutlen=500                                                      | " Allows leader + multiple keystrokes
 set foldcolumn=0                                                         | " Remove left margin
 set title                                                                | " Put title on top of Vim
 set splitbelow                                                           | " Default to splitting below, not above
 set listchars+=space:␣                                                   | " Show trailing whitespace
 set foldmethod=marker
+set display=truncate                                                     | " Show @@@ in the last line if it is truncated.
 set autoindent
 set smartindent
+set scrolloff=5                                                          | " Show a few lines of context around the cursor.
 set smarttab
 set showbreak=->
 set hlsearch
 set ignorecase                                                           | " Ignore case by default when searching
 set smartcase                                                            | " Switch to case sensitive mode if needle contains uppercase characters
-set incsearch
-set nu | " Always enable line numbers
+set incsearch                                                            | " Do incremental searching when it's possible to timeout.
+set nu                                                                   | " Always enable line numbers
+set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 
 au FocusGained,BufEnter,CursorHold * checktime
 
@@ -92,6 +98,18 @@ let g:mapleader = ","
 " ---------------------------------------------------------------
 " Colors
 " ---------------------------------------------------------------
+
+" Switch syntax highlighting on when the terminal has colors or when using the
+" GUI (which always has colors).
+if &t_Co > 2 || has("gui_running")
+  " Revert with ":syntax off".
+  syntax on
+
+  " Highlight strings inside C comments.
+  " Revert with ":unlet c_comment_strings".
+  let c_comment_strings=1
+endif
+
 " Enable 256 colors palette
 function s:auto_termguicolors()
     if !(exists("+termguicolors"))
@@ -121,6 +139,7 @@ set background=dark
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T
+    set guioptions-=t
     set guioptions-=e
     " set guitablabel=%M\ %t
 endif
@@ -193,6 +212,18 @@ au BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
+" In many terminal emulators the mouse works just fine.  By enabling it you
+" can position the cursor, Visually select and scroll with the mouse.
+" Only xterm can grab the mouse events when using the shift key, for other
+" terminals use ":", select text and press Esc.
+if has('mouse')
+  if &term =~ 'xterm'
+    set mouse=a
+  else
+    set mouse=nvi
+  endif
+endif
+
 " ---------------------------------------------------------------
 " Clipboard
 " ---------------------------------------------------------------
@@ -243,6 +274,14 @@ map <leader>pp :setlocal paste!<cr>
 
 " Sudo save
 cmap W! w !sudo tee % >/dev/null
+
+" Don't use Q for Ex mode, use it for formatting. Except for Select mode.
+map Q gq
+sunmap Q
+
+" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
 
 " ---------------------------------------------------------------
 " Filetype Specific

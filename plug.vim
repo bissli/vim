@@ -1,3 +1,5 @@
+filetype plugin indent on
+
 call plug#begin(expand($HOME.'/.vim/plugged'))
 
 " layout
