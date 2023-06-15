@@ -4,8 +4,11 @@ call plug#begin(expand($HOME.'/.vim/plugged'))
 Plug 'bissli/inkpot'
 Plug 'vim-scripts/colorsupport.vim'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'bissli/vim-close-duplicate-tabs'
+" quickfix
+Plug 'romainl/vim-qf'
+Plug 'romainl/vim-qlist'
+Plug 'stefandtw/quickfix-reflector.vim'
 " mappings
 Plug 'tpope/vim-unimpaired'
 " text
