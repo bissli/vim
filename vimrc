@@ -343,6 +343,10 @@ au BufFilePost * exe "CloseDupTabs"
 " <C-w><C-w> to toggle splits
 " <C-w>| or <c-w>_ to maximize
 " <C-w>= for even spacing
+" <C-w>: for normal mode
+" <C-w>"" for pasting the " register
+" <C-w>N to switch to normal mode
+" <C-w> :dis[play] to see all available registers and their content
 map <silent><leader>t :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>clear<cr>
 tmap <silent><leader>t :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
 
