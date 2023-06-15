@@ -59,7 +59,7 @@ Plug 'goerz/jupytext.vim'
 Plug 'jpalardy/vim-slime', {'for': ['r', 'python'] }
 Plug 'klafyvel/vim-slime-cells', {'for': ['r', 'python'] }
 " language tools / syntax
-Plug 'tpope/vim-sleuth' " will need editorconfig file
+Plug 'editorconfig/editorconfig-vim'
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
 Plug 'jalvesaq/R-Vim-runtime', { 'for': ['r'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }

@@ -33,22 +33,22 @@ let g:ultisnips_python_quoting_style="single"
 au Filetype snippets setlocal noexpandtab " requires explicit tab
 
 func! TryUltiSnips()
-    if !pumvisible()
-        call UltiSnips#ExpandSnippetOrJump()
-    endif
-    return ""
+  if !pumvisible()
+      call UltiSnips#ExpandSnippetOrJump()
+  endif
+  return ""
 endfunc
 
 func! TryAsyncomplete()
-    if g:ulti_expand_or_jump_res
+  if g:ulti_expand_or_jump_res
 		return ""
-    elseif pumvisible()
+  elseif pumvisible()
 		return "\<C-n>"
-    elseif strpart( getline('.'), 0, col('.')-1 ) !~ '^\s*$'
+  elseif strpart( getline('.'), 0, col('.')-1 ) !~ '^\s*$'
 		return "\<C-r>=asyncomplete#force_refresh()\<cr>"
-    else
+  else
 		return "\<Tab>"
-    endif
+  endif
 endfunc
 
 inoremap <silent><expr> <plug>(TryAsync) TryAsyncomplete()

@@ -87,7 +87,8 @@ if PlugLoaded('ale')
 
   let g:ale_sql_sqlformat_options = join(['',
 	  \'--reindent',
-	  \'--indent_width '.shiftwidth().'',
+	  \'--indent_width 4',
+	  \'--indent_columns',
 	  \'--keywords lower',
 	  \'--identifiers lower -'], ' ')
   function SqlFormatFormatter(buffer) abort
