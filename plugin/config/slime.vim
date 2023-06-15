@@ -1,3 +1,9 @@
+" to run as jupyter:
+" nohup jupyter console &
+" jupyter console --existing
+" in another terminal (if desired):
+" jupyter qtconsole --existing
+
 let g:slime_target = "vimterminal"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_paste_file = expand($HOME . '/.slime_paste')
