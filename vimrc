@@ -363,8 +363,8 @@ nmap <Leader>ga <Plug>(GitGutterStageHunk)
 nmap <Leader>gu <Plug>(GitGutterUndoHunk)
 nnoremap <silent><Leader>gp :call ToggleGitGutterPreviewHunk()<cr>
 if ! &diff
-	nmap ]c <Plug>(GitGutterNextHunk)
-	nmap [c <Plug>(GitGutterPrevHunk)
+  nmap ]g <Plug>(GitGutterNextHunk)
+	nmap [g <Plug>(GitGutterPrevHunk)
 endif
 
 " " Window Swap
