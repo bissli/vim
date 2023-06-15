@@ -62,21 +62,21 @@ au InsertEnter * exec 'imap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S
 
 " run LSP server
 func! s:OnLspBufferEnabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> <leader>jd <plug>(lsp-definition)
-    nmap <buffer> <leader>jr <plug>(lsp-references)
-    nmap <buffer> <leader>js <plug>(lsp-document-symbol-search)
-    nmap <buffer> <leader>jS <plug>(lsp-workspace-symbol-search)
-    nmap <buffer> <leader>ji <plug>(lsp-implementation)
-    nmap <buffer> <leader>jt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>jh <plug>(lsp-hover)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer>[j <Plug>(lsp-previous-diagnostic)
-    nmap <buffer>]j <Plug>(lsp-next-diagnostic)
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> <leader>jd <plug>(lsp-definition)
+  nmap <buffer> <leader>jr <plug>(lsp-references)
+  nmap <buffer> <leader>js <plug>(lsp-document-symbol-search)
+  nmap <buffer> <leader>jS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> <leader>ji <plug>(lsp-implementation)
+  nmap <buffer> <leader>jt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>jh <plug>(lsp-hover)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer>[j <Plug>(lsp-previous-diagnostic)
+  nmap <buffer>]j <Plug>(lsp-next-diagnostic)
+  nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+  nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 endfunc
 
 augroup lsp_install
@@ -193,9 +193,9 @@ if executable(g:jedi_language_server_path)
 endif
 
 func! PreviewHeightWorkAround()
-    if &previewwindow
-        exec 'setlocal winheight='.&previewheight
-    endif
+  if &previewwindow
+    exec 'setlocal winheight='.&previewheight
+  endif
 endfunc
 
 au BufEnter ?* call PreviewHeightWorkAround()
