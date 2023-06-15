@@ -354,7 +354,7 @@ nnoremap <C-l> <C-w>l                                       | " Switch window ri
 " ]B     :blast
 nnoremap <silent><C-p><C-p> :Buffers<cr>
 nnoremap <leader>bc :Bdelete menu<cr>
-au BufReadPost * exe "Bdelete nameless"
+au BufRead,BufNewFile * exe "Bdelete nameless"
 
 " Navigation
 nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>
@@ -376,7 +376,7 @@ nnoremap <silent> <leader>tm :tabmove
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<cr>
 au TabLeave * let g:lasttab = tabpagenr()
-au BufFilePost * exe "CloseDupTabs"
+au BufFilePost * CloseDupTabs
 
 " Terminal
 " <C-w><C-w> to toggle splits
