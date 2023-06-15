@@ -1,14 +1,14 @@
-if !isdirectory(expand($HOME . "/.vim/autoload"))
-  if has('win32') || has('win64')
-    silent ! iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
-      ni $HOME/vimfiles/autoload/plug.vim -Force
-  else
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  endif
-  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-    \| PlugInstall --sync | source $MYVIMRC
-    \| endif
+if empty(glob(expand($HOME.'/.vim/autoload/plug.vim')))
+    if has('win32') || has('win64')
+        silent ! iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
+            ni $HOME/vimfiles/autoload/plug.vim -Force
+    else
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    endif
+    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+        \| PlugInstall --sync | source $MYVIMRC
+        \| endif
 endif
 
 call plug#begin(expand($HOME.'/.vim/plugged'))
@@ -51,9 +51,9 @@ Plug 'rhysd/conflict-marker.vim'
 Plug 'bissli/dbext.vim', { 'for': ['sql', 'buffer'] }
 " parenthesis/brackets
 Plug 'tpope/vim-endwise'
-Plug 'cohama/lexima.vim', { 'for': ['javascript', 'python'] }
-Plug 'alvan/vim-closetag', { 'for': ['html', 'xhtml', 'phtml'] }
-Plug 'valloric/MatchTagAlways', { 'for': ['html', 'xhtml', 'phtml'] }
+Plug 'cohama/lexima.vim'
+Plug 'alvan/vim-closetag', { 'for': ['html'] }
+Plug 'valloric/MatchTagAlways', { 'for': ['html'] }
 " slime/jupyter
 Plug 'goerz/jupytext.vim'
 Plug 'jpalardy/vim-slime', {'for': ['r', 'python'] }
