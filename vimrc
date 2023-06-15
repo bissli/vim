@@ -374,8 +374,8 @@ endif
 " nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<cr>
 
 " Format
-nnoremap <silent><leader>ff :ALEFix<cr>
-nnoremap <leader>ft :ALEToggle<cr>
+nnoremap <silent><leader>jf :ALEFix<cr>
+nnoremap <leader>jt :ALEToggle<cr>
 
 " Grep
 nnoremap <leader>jl :call GrepDoc()<cr>
