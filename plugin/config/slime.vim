@@ -10,23 +10,21 @@ au FileType julia let b:slime_vimterminal_cmd = "julia"
 au FileType python let b:slime_vimterminal_cmd = "ipython"
 au FileType r let b:slime_vimterminal_cmd = "r"
 
+func! g:Notebook()
+  " persistent console session
+  call system('tmux has-session -t notebook || tmux new-session -d -s notebook')
+  call system('tmux send -t "notebook:.1" "cd ' . expand(getcwd()) . '" ENTER')
+  call system('tmux send -t "notebook:.1" "nohup jupyter notebook --no-browser &> /tmp/nohup-notebook.out &" ENTER')
+endfunc
+command! -nargs=0 Notebook :call Notebook()
+
 func! SlimeMappings()
+  " set up mapping
 	nmap <silent><leader>se <Plug>SlimeCellsSendAndGoToNext
   xmap <silent><leader>se <Plug>SlimeRegionSend
+  nmap <silent><leader>sc <Plug>SlimeConfig
 	nmap <silent><leader>t :botright vert term ++close<cr>ipython<cr>%clear<cr><C-w><C-w><Plug>SlimeConfig
 endfunc
 
 au FileType javascript,julia,python,r call SlimeMappings()
 
-if g:slime_cells_no_highlight
-  func! SetCellHighlighting()
-    let regex_cell = g:slime_cell_delimiter
-    let match_cmd = "syntax match SlimeCell \"" . regex_cell . "\""
-    let highlight_cmd = "highlight SlimeCell ctermfg=255 guifg=#b9b9b9 ctermbg=022 guibg=#3e3e5e cterm=bold gui=bold"
-    if !hlexists('SlimeCell')
-      execute highlight_cmd
-    endif
-    execute match_cmd
-  endfunc
-  au BufEnter *.py :call SetCellHighlighting()
-endif

@@ -2,7 +2,7 @@ filetype plugin indent on
 
 call plug#begin(expand($HOME.'/.vim/plugged'))
 
-" layout
+" general 
 Plug 'bissli/inkpot'
 Plug 'vim-scripts/colorsupport.vim'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -46,8 +46,7 @@ Plug 'tpope/vim-endwise'
 Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html'] }
 Plug 'valloric/MatchTagAlways', { 'for': ['html'] }
-" slime/jupyter
-Plug 'goerz/jupytext.vim'
+" " slime/jupyter
 Plug 'jpalardy/vim-slime', {'for': ['r', 'python'] }
 Plug 'klafyvel/vim-slime-cells', {'for': ['r', 'python'] }
 " language tools / syntax

@@ -63,10 +63,12 @@ endfunc
 silent! call HighlightNonAsciiOff()
 nnoremap <C-w>1 :call ToggleHighlightNonascii()<CR>
 
-func! g:CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
+func! g:SetCellHighlighting()
+  let regex_cell = "^#\\s*%%"
+  let match_cmd = "syntax match DataCell \"" . regex_cell . "\""
+  let highlight_cmd = "highlight DataCell ctermfg=255 guifg=#b9b9b9 ctermbg=022 guibg=#3e3e5e cterm=bold gui=bold"
+  if !hlexists('DataCell')
+    execute highlight_cmd
+  endif
+  execute match_cmd
 endfunc
