@@ -46,9 +46,6 @@ Plug 'tpope/vim-endwise'
 Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html'] }
 Plug 'valloric/MatchTagAlways', { 'for': ['html'] }
-" " slime/jupyter
-Plug 'jpalardy/vim-slime', {'for': ['r', 'python'] }
-Plug 'klafyvel/vim-slime-cells', {'for': ['r', 'python'] }
 " language tools / syntax
 Plug 'editorconfig/editorconfig-vim'
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
