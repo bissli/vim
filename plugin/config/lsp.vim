@@ -63,7 +63,6 @@ au InsertEnter * exec 'imap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S
 " run LSP server
 func! s:OnLspBufferEnabled() abort
   setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> <leader>jd <plug>(lsp-definition)
   nmap <buffer> <leader>jr <plug>(lsp-references)

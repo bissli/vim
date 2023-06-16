@@ -28,3 +28,5 @@ func! ToggleGitGutterPreviewHunk() abort
 		GitGutterPreviewHunk
 	endif
 endfunc
+
+au BufEnter *.ipynb exe "GitGutterBufferDisable"
