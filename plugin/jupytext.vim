@@ -339,4 +339,13 @@ function s:cleanup(jupytext_file, delete)
 endfunction
 
 
+func! g:Notebook()
+ " persistent console session
+ call system('tmux has-session -t notebook || tmux new-session -d -s notebook')
+ call system('tmux send -t "notebook:.1" "cd ' . expand(getcwd()) . '" ENTER')
+ call system('tmux send -t "notebook:.1" "nohup jupyter notebook --no-browser &> /tmp/nohup-notebook.out &" ENTER')
+endfunc
+command! -nargs=0 Notebook :call Notebook()
+
+
 let loaded_jupytext = 1

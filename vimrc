@@ -292,9 +292,6 @@ au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
 au BufRead,BufNewFile *.ipynb set filetype=ipynb
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
-
-" Read/write helpers to avoid warning messages
-au BufWritePre * silent write | write! %
 au FocusGained * :redraw!
 
 " Triger `autoread` when files changes on disk
