@@ -77,17 +77,10 @@ set incsearch                                                            | " Do 
 set nu                                                                   | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 
-au FocusGained,BufEnter,CursorHold * checktime
-
-
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 " command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 command W w !sudo tee % > /dev/null
-
-" Don't redraw while executing macros (good performance config)
-"set lazyredraw
-au FocusGained * :redraw!
 
 " ---------------------------------------------------------------
 " Leader
@@ -297,9 +290,16 @@ au BufRead /tmp/psql.edit.* set filetype=sql
 au BufRead /tmp/ssql.edit.* set filetype=sql
 au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
-au BufRead,BufNewFile *.ipynb set filetype=python
+au BufRead,BufNewFile *.ipynb set filetype=ipynb
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
-au BufWritePre *.txt,*.py,*.js,*.sh,*.coffee,*.sql,*.vim,vimrc :call CleanExtraSpaces()
+
+" Read/write helpers to avoid warning messages
+au BufWritePre * silent write | write! %
+au FocusGained * :redraw!
+
+" Triger `autoread` when files changes on disk
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+  \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 
 " Folding
 
