@@ -350,8 +350,9 @@ nnoremap <C-l> <C-w>l                                       | " Switch window ri
 " [B     :bfirst
 " ]B     :blast
 nnoremap <silent><C-p><C-p> :Buffers<cr>
-nnoremap <leader>bc :Bdelete menu<cr>
-au BufRead,BufNewFile * exe "Bdelete nameless"
+nnoremap <silent><leader>bc :BufClose<cr> 
+nnoremap <silent><leader>bh :BufHiddenClose<cr> 
+au BufRead,BufNewFile * BufNoNameClose
 
 " Navigation
 nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>

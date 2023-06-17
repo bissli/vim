@@ -54,8 +54,6 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
 " markdown
 Plug 'preservim/vim-markdown'
-" buffers
-Plug 'Asheq/close-buffers.vim'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 Plug 'github/copilot.vim', {'for': ['python']}
