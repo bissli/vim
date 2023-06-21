@@ -9,25 +9,27 @@ if PlugLoaded('ale')
   \   '\.min\.js$'    : {'ale_enabled': 0},
   \   '\.min\.css$'   : {'ale_enabled': 0},
   \}
-  let g:ale_enabled = 0
-  let g:ale_open_list = 1
-  let g:ale_set_signs = 0
+  let g:ale_enabled = 1
+  let g:ale_open_list = 0
+  let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
+  let g:ale_sign_error = "~"
+  let g:ale_sign_warning = "~"
 
   " => lint
   let g:ale_linters = {
 	  \'javascript': ['eslint'],
-	  \'python': ['flake8', 'pylint', 'pyflakes'],
+	  \'python': ['flake8', 'pylint', 'mypy'],
 	  \'go': ['go', 'golint', 'errcheck'],
 	  \'cpp': ['clangtidy'],
 	  \'cs': ['OmniSharp'],
 	  \'c': ['clangtidy'],
 	  \'tex': ['chktex'],
 	  \'matlab': ['mlint'],
-  \} " mypy
+  \}
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_save = 0
+  let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 0
   let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_filetype_changed = 0
@@ -37,12 +39,7 @@ if PlugLoaded('ale')
   let g:ale_c_parse_compile_commands=1
   let g:ale_cpp_clangtidy_extra_options = ''
   let g:ale_cpp_clangtidy_options = ''
-  " autopep8
-  let g:pep8_select_warnings = 'W601,W602,W603,W604,W605,W690'
-  let g:pep8_select_errors = 'E101,E11'
-  let g:pep8_ignore_warnings = 'W503,W504'
-  let g:pep8_ignore_errors = 'E121,E124,E126,E128,E201,E203,E221,E222,E231,E241,E251,E272,E301,E402,E501,E722'
-  let g:pep8_ignore_mypy = 'S001,B005,B006,B007,B008,B009,B010,B011,B015,B301'
+  " flake8
   " " Don't warn on
   "   E121 continuation line indentation is not a multiple of four
   "   E124 closing bracket does not match visual indentation
@@ -58,30 +55,28 @@ if PlugLoaded('ale')
   "   E272 multiple spaces before keyword
   "   E301 expected 1 blank line, found 0
   "   E402 do not assign a lamda expression, use a def
+  "   E501 line too long
   "   E722 do not use bare 'except'
-  "   W501 line too long
+  "   E731 do not assign a lambda expression, use a def 
+  "   E1101 no-member: Instance of 'foo' has no 'bar' member 
   "   W503 line break occurred before a binary operator
   "   W504 module level importnot at top of file
   "   S001, B005, B006, B007, B008, B009, B010, B011, B015, B301 (for mypy compatability)
-  let g:pep8_ignore = 'E121,E124,E126,E128,E201,E203,E221,E222,E231,E241,E251,E272,E301,E402,E722,E501,W503,W504,S001,B005,B006,B007,B008,B009,B010,B011,B015,B301'
-
+  let g:pep8_ignore = 'E121,E124,E126,E128,E201,E203,E221,E222,E231,E241,E251,E272,E301,E402,E501,E722,E731,E1101,W501,W503,W504,S001,B005,B006,B007,B008,B009,B010,B011,B015,B301'
   let g:ale_python_flake8_options='--ignore='.pep8_ignore.' --max-line-length=88'
+  let g:ale_python_flake8_auto_poetry = 1
+  let g:ale_python_flake8_auto_pipenv = 1
   let g:ale_python_pylint_options='--disable=all --enable=F,E,unused-variable,unused-import,unreachable,duplicate_key,wrong-import-order,unecessary-pass'
+  let g:python_pylint_auto_pipenv = 1
+  let g:python_pylint_auto_poetry = 1
 
   let g:ale_python_mypy_show_notes = 1
-  " let g:ale_python_mypy_options = '--ignore-missing-imports'
 
   " => fix / format
 
-  function! FormatBlue(buffer) abort
-      return {
-      \   'command': 'blue --line-length 119 -'
-      \}
-  endfunction
-
   function PythonDocFormatter(buffer) abort
       return {
-      \   'command': 'docformatter --black -'
+      \   'command': 'docformatter --config ~/pyproject.toml -'
       \}
   endfunction
 
@@ -97,8 +92,6 @@ if PlugLoaded('ale')
       \}
   endfunction
 
-
-  execute ale#fix#registry#Add('blue', 'FormatBlue', ['python'], 'blue formatter for python')
   execute ale#fix#registry#Add('docformatter', 'PythonDocFormatter', ['python'], 'docformatter for python')
   execute ale#fix#registry#Add('sqlformat', 'SqlFormatFormatter', ['sql'], 'sqlformat formatter for sql')
 
@@ -110,7 +103,7 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['docformatter', 'blue', 'autoflake', 'isort'],
+	  \'python'     : ['docformatter', 'black', 'autoflake', 'isort'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'xsd'        : ['xmllint'],
@@ -122,11 +115,9 @@ if PlugLoaded('ale')
   let g:ale_fix_on_enter = 0
   let g:ale_javascript_prettier_use_local_config = 0
   let g:ale_sql_pgformatter_options = "--spaces 4 --comma-break --function-case 1 --keyword-case 1 --type-case 1"
-  let g:ale_python_autopep8_options = '--ignore '.pep8_ignore.' --max-line-length 88'
   let g:ale_python_autoflake_options = "--remove-all-unused-imports --expand-star-imports --ignore-init-module-imports"
   let g:ale_python_pydocstyle_options = '--max-line-length=119 --convention=numpy --add-ignore=D100,D101,D102,D103,D104,D105,D106,D107,D202'
   let g:ale_python_black_options = '--line-length 119 --skip-string-normalization --preview'
-  let g:ale_python_isort_options = '-m=8'
   let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_html_beautify_options = '--indent-size 2'
