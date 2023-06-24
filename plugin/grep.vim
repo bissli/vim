@@ -1,9 +1,11 @@
-if executable('ag')
-	set grepprg=ag\ --silent\ --vimgrep\ --nogroup\ --nocolor\ --ignore\ tags\ --smart-case\ --column
-endif
-if executable('rg')
-	set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
-	set grepformat=%f:%l:%c:%m
+if executable("rg")
+	  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+elseif executable("ag")
+	  set grepprg=ag\ --silent\ --vimgrep\ --nogroup\ --nocolor\ --smart-case\ --column\ $*
+    set grepformat=%f:%l:%c:%m
+else
+    let &grepprg='grep -n -r --exclude=' . shellescape(&wildignore) . ' $* .'
 endif
 
 function! s:VSetSearch()
@@ -21,7 +23,7 @@ endfunction
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
 command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
 
-augroup quickfix
+augroup grepper 
 	autocmd!
 	autocmd QuickFixCmdPost cgetexpr cwindow
 	autocmd QuickFixCmdPost lgetexpr lwindow
@@ -37,5 +39,5 @@ endfunc
 
 func! GrepWs()
 	" Search word under cursor
-	silent! execute "Grep ".expand('<cword>')
+	silent! execute "Grep ".expand('<cword>'). " " .FindRootDirectory()
 endfunc
