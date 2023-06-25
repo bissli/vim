@@ -9,17 +9,29 @@ if PlugLoaded('ale')
   \   '\.min\.js$'    : {'ale_enabled': 0},
   \   '\.min\.css$'   : {'ale_enabled': 0},
   \}
-  let g:ale_enabled = 1
-  let g:ale_open_list = 0
-  let g:ale_set_signs = 1
+  let g:ale_enabled = 0
+  let g:ale_open_list = 1
+  let g:ale_set_signs = 0
   let g:ale_set_highlights = 0
   let g:ale_sign_error = "~"
   let g:ale_sign_warning = "~"
+  let g:ale_sign_style_error = '~'
+  let g:ale_sign_style_warning = '~'
+  let g:ale_use_global_executables = 1
+
+  " auto env (cd managed by smartcd)
+  let g:ale_python_auto_pipenv = 0
+  let g:ale_python_auto_poetry = 0
+  let g:ale_python_auto_virtualenv = 0
+  let g:ale_python_flake8_auto_poetry = 0
+  let g:ale_python_flake8_auto_pipenv = 0
+  let g:python_pylint_auto_pipenv = 0
+  let g:python_pylint_auto_poetry = 0
 
   " => lint
   let g:ale_linters = {
 	  \'javascript': ['eslint'],
-	  \'python': ['flake8', 'pylint', 'mypy'],
+	  \'python': ['flake8', 'pylint'],
 	  \'go': ['go', 'golint', 'errcheck'],
 	  \'cpp': ['clangtidy'],
 	  \'cs': ['OmniSharp'],
@@ -29,7 +41,7 @@ if PlugLoaded('ale')
   \}
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_save = 0
   let g:ale_lint_on_text_changed = 0
   let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_filetype_changed = 0
@@ -62,21 +74,19 @@ if PlugLoaded('ale')
   "   W503 line break occurred before a binary operator
   "   W504 module level importnot at top of file
   "   S001, B005, B006, B007, B008, B009, B010, B011, B015, B301 (for mypy compatability)
-  let g:pep8_ignore = 'E121,E124,E126,E128,E201,E203,E221,E222,E231,E241,E251,E272,E301,E402,E501,E722,E731,E1101,W501,W503,W504,S001,B005,B006,B007,B008,B009,B010,B011,B015,B301'
-  let g:ale_python_flake8_options='--ignore='.pep8_ignore.' --max-line-length=88'
-  let g:ale_python_flake8_auto_poetry = 1
-  let g:ale_python_flake8_auto_pipenv = 1
+  let s:errors = 'E121,E124,E126,E128,E201,E203,E221,E222,E231,E241,E251,E272,E301,E402,E501,E722,E731,E1101'
+  let s:warnings = 'W501,W503,W504' 
+  let s:other = 'S001,B005,B006,B007,B008,B009,B010,B011,B015,B301'
+  let g:pep8_ignore = s:errors . ',' . s:warnings . ',' . s:other 
+  let g:ale_python_flake8_options='--ignore='.pep8_ignore.' --max-line-length=119'
   let g:ale_python_pylint_options='--disable=all --enable=F,E,unused-variable,unused-import,unreachable,duplicate_key,wrong-import-order,unecessary-pass'
-  let g:python_pylint_auto_pipenv = 1
-  let g:python_pylint_auto_poetry = 1
-
-  let g:ale_python_mypy_show_notes = 1
+  let g:ale_python_autoflake_options = "--remove-all-unused-imports --expand-star-imports --ignore-init-module-imports"
 
   " => fix / format
 
   function PythonDocFormatter(buffer) abort
       return {
-      \   'command': 'docformatter --config ~/pyproject.toml -'
+      \   'command': 'docformatter --black -'
       \}
   endfunction
 
@@ -103,9 +113,11 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['docformatter', 'black', 'autoflake', 'isort'],
+	  \'python'     : ['autoflake', 'isort', 'docformatter', 'black'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
+	  \'toml'       : ['dprint'],
+	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
 	  \'sql'        : ['sqlformat']
@@ -115,9 +127,8 @@ if PlugLoaded('ale')
   let g:ale_fix_on_enter = 0
   let g:ale_javascript_prettier_use_local_config = 0
   let g:ale_sql_pgformatter_options = "--spaces 4 --comma-break --function-case 1 --keyword-case 1 --type-case 1"
-  let g:ale_python_autoflake_options = "--remove-all-unused-imports --expand-star-imports --ignore-init-module-imports"
   let g:ale_python_pydocstyle_options = '--max-line-length=119 --convention=numpy --add-ignore=D100,D101,D102,D103,D104,D105,D106,D107,D202'
-  let g:ale_python_black_options = '--line-length 119 --skip-string-normalization --preview'
+  let g:ale_python_black_options = '--line-length 119 --skip-string-normalization'
   let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_html_beautify_options = '--indent-size 2'
