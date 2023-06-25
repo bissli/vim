@@ -1,9 +1,7 @@
 if executable("rg")
 	  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
 elseif executable("ag")
-	  set grepprg=ag\ --silent\ --vimgrep\ --nogroup\ --nocolor\ --smart-case\ --column\ $*
-    set grepformat=%f:%l:%c:%m
+	  set grepprg=ag\ --silent\ --vimgrep\ --nogroup\ --nocolor\ --smart-case\ --column
 else
     let &grepprg='grep -n -r --exclude=' . shellescape(&wildignore) . ' $* .'
 endif
@@ -17,29 +15,16 @@ endfunction
 
 " https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 function! Grep(...)
-  let s:command = join([&grepprg] + [expandcmd(join(a:000, ' '))], ' ')
-  return system(s:command)
+	return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
 endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
 command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
 
-augroup quickfix 
+augroup quickfix
 	autocmd!
-  " q to quit the quickfix list
-  autocmd BufWinEnter quickfix nnoremap <silent><buffer>q :cclose<cr>:lclose<cr>
-  " Make sure that enter is never overriden in the quickfix window
-  " https://superuser.com/a/815422
-  autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
-  " push quickfix window always to the bottom
-  autocmd FileType qf wincmd J
-  " grep to quickfix
-	autocmd QuickFixCmdPost cgetexpr cwindow 
-        \| call setqflist([], 'a', {'title': ':' . s:command})
-        \| call setqflist(ShortenPathsInList(getqflist()))
-  " grep to location list
-  autocmd QuickFixCmdPost lgetexpr lwindow 
-        \| call setloclist(0, [], 'a', {'title': ':' . s:command})
+	autocmd QuickFixCmdPost cgetexpr cwindow | call setqflist(ShortenPathsInList(getqflist()))
+  autocmd QuickFixCmdPost lgetexpr lwindow | call setloclist(ShortenPathsInList(getloclist()))
 augroup END
 
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
@@ -65,4 +50,3 @@ func! ShortenPathsInList(list)
     endwhile
     return a:list
 endfunc
-

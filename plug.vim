@@ -8,7 +8,9 @@ Plug 'vim-scripts/colorsupport.vim'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'bissli/vim-close-duplicate-tabs'
 " quickfix
-Plug 'bissli/vim-toggle-quickfix'
+Plug 'romainl/vim-qf'
+Plug 'romainl/vim-qlist'
+Plug 'stefandtw/quickfix-reflector.vim'
 " mappings
 Plug 'tpope/vim-unimpaired'
 " text

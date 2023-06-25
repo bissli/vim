@@ -32,9 +32,8 @@ set fileformats=unix,dos,mac                                             | " Use
 set autoread                                                             | " Reload files changed outside vim
 set history=1000                                                         | " Store lots of :cmdline history
 set updatetime=100                                                       | " ??
-set completeopt+=menu,popup,menuone,noselect,noinsert,longest
+set completeopt+=menu,popup,menuone,noselect,noinsert,longest            | " Complete options
 set previewheight=15
-" set completeopt=menuone,noinsert,noselect,preview                      | " enable preview window
 set noswapfile                                                           | " No swap file
 set nobackup                                                             | " No backup
 set nowb                                                                 | " No write-backup
@@ -77,10 +76,13 @@ set incsearch                                                            | " Do 
 set nu                                                                   | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 
-" :W sudo saves the file
+" Because I press this all the time
+command W w
+
+" :S sudo saves the file
 " (useful for handling the permission-denied error)
-" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
-command W w !sudo tee % > /dev/null
+" command! S execute 'w !sudo tee % > /dev/null' <bar> edit!
+command S w !sudo tee % > /dev/null
 
 " ---------------------------------------------------------------
 " Leader
@@ -388,7 +390,8 @@ map <silent><leader>t :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>c
 tmap <silent><leader>t :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
 
 " Git
-nnoremap <leader>gb :Git blame<cr>
+nnoremap <Leader>gb :Git blame<cr>
+nnoremap <Leader>gs :Git status<cr>
 nnoremap <leader>gL :call GitCommand("lg")<cr>
 nnoremap <leader>gl :call GitCommand("log")<cr>
 nnoremap <leader>gr :call GitCommand("reflog")<cr>
@@ -396,6 +399,11 @@ nnoremap <Leader>gh :Silent Glog<cr>
 nnoremap <Leader>gH :Silent Glog<cr>:set nofoldenable<cr>
 nnoremap <Leader>gd :Gdiffsplit<cr>
 nnoremap <Leader>gc :Git commit<cr>
+nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
+nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
+" nnoremap <Leader>gr :Gread<CR>
+" nnoremap <Leader>gw :Gwrite<CR>
+" nnoremap <Leader>gp :Git push<CR>
 nmap <Leader>ga <Plug>(GitGutterStageHunk)
 nmap <Leader>gu <Plug>(GitGutterUndoHunk)
 nnoremap <silent><Leader>gp :call ToggleGitGutterPreviewHunk()<cr>
@@ -442,4 +450,4 @@ nnoremap <leader>jj :%s/<c-r>=expand("<cword>")<cr>/
 " ]Q     :clast
 nnoremap <leader>co :botright copen<cr>
 nnoremap <leader>cx :cclose<cr>
-nmap <silent>\ <Plug>window:quickfix:loop
+nmap <silent>\ <Plug>(qf_qf_toggle)
