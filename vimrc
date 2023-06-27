@@ -40,7 +40,6 @@ set nowb                                                                 | " No 
 set nowrap                                                               | " Do not wrap by default
 set shortmess+=c                                                         | " Suppress completion menu messages
 set laststatus=2                                                         | " Alawys show statusline
-set scrolloff=7 " ??
 set wildcharm=<tab>
 set wildmode=list:longest
 set wildignore=*.o,*~,*.pyc,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
@@ -73,7 +72,7 @@ set hlsearch
 set ignorecase                                                           | " Ignore case by default when searching
 set smartcase                                                            | " Switch to case sensitive mode if needle contains uppercase characters
 set incsearch                                                            | " Do incremental searching when it's possible to timeout.
-set nu                                                                   | " Always enable line numbers
+set number                                                               | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 
 " Because I press this all the time
@@ -293,6 +292,7 @@ au BufRead /tmp/ssql.edit.* set filetype=sql
 au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
 au BufRead,BufNewFile *.ipynb set filetype=ipynb
+au BufRead,BufNewFile *ideavimrc set filetype=vim
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 au FocusGained * :redraw!
 
@@ -351,13 +351,15 @@ nnoremap <C-l> <C-w>l                                       | " Switch window ri
 " ]b     :bnext
 " [B     :bfirst
 " ]B     :blast
-nnoremap <silent><C-p><C-p> :Buffers<cr>
-nnoremap <silent><leader>bc :BufClose<cr> 
-nnoremap <silent><leader>bh :BufHiddenClose<cr> 
+nnoremap <silent>bb :CtrlPBuffer<cr>
+nnoremap <silent><leader>bc :BufClose<cr>
+nnoremap <silent><leader>bh :BufHiddenClose<cr>
 au BufRead,BufNewFile * BufNoNameClose
 
 " Navigation
-nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>
+nnoremap <silent><C-p> :CtrlP<cr>
+nnoremap <leader>f :CtrlPFunky<Cr>
+nnoremap <leader>e :CtrlPEnv<cr>
 
 " Tag management
 " [t     :tprevious
@@ -366,6 +368,7 @@ nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>
 " ]T     :tlast
 
 " Tab management
+nnoremap <silent> <leader>tt :CtrlPSmartTabs<cr>
 nnoremap <silent> <leader>gt :tabnext<cr>
 nnoremap <silent> <leader>gT :tabprevious<cr>
 nnoremap <silent> <leader>tn :tabnew<cr>
@@ -386,8 +389,8 @@ au BufFilePost * CloseDupTabs
 " <C-w>"" for pasting the " register
 " <C-w>N to switch to normal mode
 " <C-w> :dis[play] to see all available registers and their content
-map <silent><leader>t :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>clear<cr>
-tmap <silent><leader>t :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
+map <silent><leader>T :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>clear<cr>
+tmap <silent><leader>T :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
 
 " Git
 nnoremap <Leader>gb :Git blame<cr>
@@ -419,8 +422,8 @@ endif
 " nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<cr>
 
 " Format
-nnoremap <silent><leader>jf :ALEFix<cr>
-nnoremap <leader>jF :ALEToggle<cr>
+nnoremap <silent><leader>ja :ALEFix<cr>
+nnoremap <leader>jA :ALEToggle<cr>
 
 " Grep
 nnoremap <leader>jl :call GrepDoc()<cr>

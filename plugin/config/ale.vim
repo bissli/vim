@@ -137,6 +137,6 @@ if PlugLoaded('ale')
 	  exe ":'<,'> !sqlformat " . g:ale_sql_sqlformat_options
   endfunc
 
-  au Filetype sql exec 'xnoremap <silent><buffer><leader>ff <Esc>:call SqlformatFormatRange()<cr>'
+  au Filetype sql exec 'xnoremap <silent><buffer><leader>ja <Esc>:call SqlformatFormatRange()<cr>'
 
 endif
