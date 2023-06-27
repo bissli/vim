@@ -26,7 +26,9 @@ else
   let g:ctrlp_clear_cache_on_exit = 0
 endif
 
-if has('python3')
-  " let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+if has('python3') && g:os != 'Linux'
+  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+else
   let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }
 endif
+  

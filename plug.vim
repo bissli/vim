@@ -22,8 +22,8 @@ Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim' 
-" Plug 'bissli/ctrlp-py-matcher'
-Plug 'bissli/cpsm', { 'do': 'env PY3=ON ./install.sh' }
+if g:os == 'Linux' | Plug 'bissli/cpsm', { 'do': 'env PY3=ON ./install.sh' } | endif
+if g:os != 'Linux' | Plug 'bissli/ctrlp-py-matcher' | endif
 Plug 'prabirshrestha/ctrlp-env'
 Plug 'tacahiroy/ctrlp-funky' 
 Plug 'DavidEGx/ctrlp-smarttabs'
