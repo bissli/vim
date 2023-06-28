@@ -63,6 +63,9 @@ Plug 'preservim/vim-markdown'
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 Plug 'github/copilot.vim', {'for': ['python']}
 Plug 'rhysd/vim-healthcheck'
+" Slime
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 
 call plug#end()
 
