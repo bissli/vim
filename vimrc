@@ -352,13 +352,12 @@ nnoremap <C-k> <C-w>k                                       | " Switch window up
 nnoremap <C-l> <C-w>l                                       | " Switch window right
 
 " Buffer management
-" [b     :bprevious
-" ]b     :bnext
 " [B     :bfirst
 " ]B     :blast
-nnoremap <silent>bb :CtrlPBuffer<cr>
 nnoremap <silent><leader>bc :BufClose<cr>
 nnoremap <silent><leader>bh :BufHiddenClose<cr>
+nmap <silent><unique>]b <Plug>CycleToNextBuffer
+nmap <silent><unique>[b <Plug>CycleToPreviousBuffer
 au BufRead,BufNewFile * BufNoNameClose
 
 " Navigation

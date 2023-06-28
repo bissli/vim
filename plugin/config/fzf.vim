@@ -3,10 +3,6 @@ if PlugLoaded('fzf')
   let g:fzf_buffers_jump = 1
   let g:fzf_layout = {'down': '40%'}
 
-  if !&diff
-      au BufEnter * silent! lcd %:p:h " change cwd on enter buffer/tab
-  endif
-
   let g:fzf_action = {
       \ 'ctrl-t': 'tab drop',
       \ 'ctrl-x': 'split',
