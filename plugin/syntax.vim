@@ -63,12 +63,21 @@ endfunc
 silent! call HighlightNonAsciiOff()
 nnoremap <C-w>1 :call ToggleHighlightNonascii()<CR>
 
-func! g:SetCellHighlighting()
-  let regex_cell = "^#\\s*%%"
-  let match_cmd = "syntax match DataCell \"" . regex_cell . "\""
-  let highlight_cmd = "highlight DataCell ctermfg=255 guifg=#b9b9b9 ctermbg=022 guibg=#3e3e5e cterm=bold gui=bold"
-  if !hlexists('DataCell')
-    execute highlight_cmd
+func! SetCellHighlighting()
+  " marker: # %%
+  let regex_marker = "^#\\s*%%"
+  let match_marker_cmd = "syntax match CellMarker \"" . regex_marker . "\""
+  let highlight_marker_cmd = "highlight CellMarker ctermfg=255 guifg=#b9b9b9 ctermbg=022 guibg=#3e3e5e cterm=bold gui=bold"
+  if !hlexists('CellMarker')
+    execute highlight_marker_cmd
   endif
-  execute match_cmd
+  execute match_marker_cmd
+  " title: [Title] 
+  let regex_title = '\v(#\s*\%\%\s)@<=\[.*\]' 
+  let match_title_cmd = "syntax match CellTitle \"" . regex_title . "\""
+  let highlight_title_cmd = "highlight link CellTitle Comment"
+  if !hlexists('CellTitle')
+    execute highlight_title_cmd
+  endif
+  execute match_title_cmd
 endfunc

@@ -52,6 +52,7 @@ Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html'] }
 Plug 'valloric/MatchTagAlways', { 'for': ['html'] }
 " language tools / syntax
+Plug 'inkarkat/vim-SyntaxRange'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
 Plug 'jalvesaq/R-Vim-runtime', { 'for': ['r'] }
@@ -64,8 +65,8 @@ Plug 'preservim/vim-markdown'
 Plug 'github/copilot.vim', {'for': ['python']}
 Plug 'rhysd/vim-healthcheck'
 " Slime
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown'] }
+Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
 
 call plug#end()
 

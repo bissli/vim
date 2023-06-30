@@ -6,7 +6,7 @@ let g:slime_default_config = {
 let g:slime_paste_file = expand($HOME . '/.slime_paste')
 let g:slime_python_ipython = 1
 let g:slime_no_mappings = 1
-let g:slime_cell_delimiter = "^#\\s*%%"
+let g:slime_cell_delimiter = '^#\\s*%%'
 
 let g:ipython_cell_send_cell_headers = 1
 let g:ipython_cell_highlight_cells = 0
@@ -16,27 +16,36 @@ let g:ipython_cell_regex = g:slime_cell_delimiter
 xmap <leader>se <Plug>SlimeRegionSend
 " nmap <leader>sf <Plug>SlimeConfig
 
-func! g:OpenIpython()
+func! SlimeConsoleOpen()
 	call system('tmux split-window -fh -p 40')
-	silent execute('SlimeSend1 ipython')
+  silent execute('SlimeSend1 ' . b:key)
 	call system('tmux last-pane')
 endfunc
 
-func! g:CloseIpython()
+func! SlimeConsoleClose()
 	silent execute('SlimeSend1 exit')
 	call system('tmux last-pane')
 	call system('tmux kill-pane')
 endfunc
 
-func! SlimePyMappings()
+func! SlimeMappings()
   nmap <silent><leader>se :IPythonCellExecuteCellJump<CR>
   nnoremap [c :IPythonCellPrevCell<CR>
   nnoremap ]c :IPythonCellNextCell<CR>
-  nnoremap <silent><leader>sc :IPythonCellClear<CR>
+  nnoremap <silent><leader>sl :IPythonCellClear<CR>
   nnoremap <silent><leader>sx :IPythonCellClose<CR>
-	map <F2> :call OpenIpython()<cr>
-	map <F3> :call CloseIpython()<cr>
+  nnoremap <silent><leader>sm :IPythonCellToMarkdown<CR>
+	map <F2> :call SlimeConsoleOpen()<cr>
+	map <F3> :call SlimeConsoleClose()<cr>
 endfunc
 
-au BufRead,BufNewFile *.ipynb set filetype=python
-autocmd FileType python call SlimePyMappings()
+autocmd FileType python,r let b:key = 'ipython' | call SlimeMappings()
+
+" python equivalent in jupytext.vim
+augroup slime_syntax_cells
+  au!
+  " au TextChanged,TextChangedI,TextChangedP,BufWinEnter,BufWritePost,FileWritePost
+  au BufReadPost *.py,*.R,*.r call g:SetCellHighlighting()
+  au Syntax * call SyntaxRange#Include('py->', '<-py', 'python', 'Transparent')
+  au Syntax * call SyntaxRange#Include('r->', '<-r', 'r', 'Transparent')
+augroup end

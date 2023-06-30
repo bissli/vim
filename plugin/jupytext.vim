@@ -223,13 +223,14 @@ endfunction
 augroup jupytext_ipynb
   " Remove all ipynb autocommands
   au!
-  autocmd BufReadCmd *.ipynb  call s:read_from_ipynb()
+  au BufRead,BufNewFile *.ipynb set filetype=python
+  au BufReadCmd *.ipynb call s:read_from_ipynb()
 augroup END
 
 
-augroup highlight_cells
+augroup jupytext_highlight_cells
  au!
- au BufEnter,TextChanged *.ipynb :call g:SetCellHighlighting()
+ au BufEnter,TextChanged *.ipynb call SetCellHighlighting()
 augroup end
 
 

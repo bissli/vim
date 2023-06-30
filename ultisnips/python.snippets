@@ -53,3 +53,18 @@ snippet iftest "iftest" b
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
 	__import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).test_mod() 
 endsnippet
+
+snippet scp "slime cell [python]" bw
+# %% [${1:Title}] py->
+${0}
+
+# ^^ <-py
+endsnippet
+
+snippet scr "slime cell [r]" bw
+# %% [${1:Title}] r->
+%%R
+${0}
+
+# ^^ <-r
+endsnippet
