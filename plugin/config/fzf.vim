@@ -36,4 +36,22 @@ if PlugLoaded('fzf')
   let $FZF_DEFAULT_COMMAND = "ag " . join(s:fzf_command_flags)
   let $FZF_DEFAULT_OPTS=join(s:fzf_opts_flags)
 
+  func! s:list_buffers()
+    redir => list
+    silent ls
+    redir END
+    return split(list, "\n")
+  endfunc
+
+  func! s:delete_buffers(lines)
+    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+  endfunc
+
+  command! FZFBufferDelete call fzf#run(fzf#wrap({
+    \ 'source': s:list_buffers(),
+    \ 'sink*': { lines -> s:delete_buffers(lines) },
+    \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+    \ }))
+  nnoremap <silent><C-p><C-@> :FZFBufferDelete<cr>
+
 endif

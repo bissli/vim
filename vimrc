@@ -361,9 +361,12 @@ nmap <silent><unique>[b <Plug>CycleToPreviousBuffer
 au BufRead,BufNewFile * BufNoNameClose
 
 " Navigation
-nnoremap <silent><C-p> :CtrlP<cr>
-nnoremap <leader>f :CtrlPFunky<Cr>
-nnoremap <leader>e :CtrlPEnv<cr>
+if g:os == 'Linux'
+  nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>
+  nnoremap <silent><C-p><C-f> :Buffers<cr>
+else
+  nnoremap <silent><C-p> :CtrlP<cr>
+endif
 
 " Tag management
 " [t     :tprevious
@@ -372,7 +375,6 @@ nnoremap <leader>e :CtrlPEnv<cr>
 " ]T     :tlast
 
 " Tab management
-nnoremap <silent> <leader>tt :CtrlPSmartTabs<cr>
 nnoremap <silent> <leader>gt :tabnext<cr>
 nnoremap <silent> <leader>gT :tabprevious<cr>
 nnoremap <silent> <leader>tn :tabnew<cr>

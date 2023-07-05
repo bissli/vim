@@ -21,12 +21,14 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
-Plug 'ctrlpvim/ctrlp.vim' 
-if g:os == 'Linux' | Plug 'bissli/cpsm', { 'do': 'env PY3=ON ./install.sh' } | endif
-if g:os != 'Linux' | Plug 'bissli/ctrlp-py-matcher' | endif
-Plug 'prabirshrestha/ctrlp-env'
-Plug 'tacahiroy/ctrlp-funky' 
-Plug 'DavidEGx/ctrlp-smarttabs'
+if g:os == 'Linux'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | Plug 'junegunn/fzf.vim'
+else
+  Plug 'ctrlpvim/ctrlp.vim' 
+  Plug 'bissli/ctrlp_bdelete.vim'
+  Plug 'bissli/ctrlp-py-matcher'
+  " Plug 'bissli/cpsm', { 'do': 'env PY3=ON ./install.sh' }
+endif
 Plug 'ludovicchabant/vim-gutentags'
 " completion / lsp
 Plug 'prabirshrestha/vim-lsp'
