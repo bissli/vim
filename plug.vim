@@ -7,6 +7,7 @@ Plug 'bissli/inkpot'
 Plug 'vim-scripts/colorsupport.vim'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'bissli/vim-close-duplicate-tabs'
+Plug 'liuchengxu/vista.vim'
 " quickfix
 Plug 'romainl/vim-qf'
 Plug 'romainl/vim-qlist'
@@ -27,7 +28,6 @@ else
   Plug 'ctrlpvim/ctrlp.vim' 
   Plug 'bissli/ctrlp_bdelete.vim'
   Plug 'bissli/ctrlp-py-matcher'
-  " Plug 'bissli/cpsm', { 'do': 'env PY3=ON ./install.sh' }
 endif
 Plug 'ludovicchabant/vim-gutentags'
 " completion / lsp
