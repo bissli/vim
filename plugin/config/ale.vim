@@ -120,7 +120,8 @@ if PlugLoaded('ale')
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
-	  \'sql'        : ['sqlformat']
+	  \'sql'        : ['sqlformat'],
+	  \'r'          : ['styler']
   \}
   let g:ale_fixers_explicit = 1
   let g:ale_fix_on_save_ignore = 1
