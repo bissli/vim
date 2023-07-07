@@ -22,7 +22,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
-if g:os == 'Linux'
+if g:os !~ 'Windows'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | Plug 'junegunn/fzf.vim'
 else
   Plug 'ctrlpvim/ctrlp.vim' 

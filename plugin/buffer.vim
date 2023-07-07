@@ -1,17 +1,11 @@
-"=============================================================================
-let s:k_version = 001
-"=============================================================================
-
-" Avoid global reinclusion {{{1
 if &cp || (exists("g:loaded_config_buffer") && !exists('g:force_reload_config_buffer'))
   finish
 endif
-let g:loaded_config_tabs = s:k_version
 let s:cpo_save=&cpo
 set cpo&vim
-" Avoid global reinclusion }}}1
-"------------------------------------------------------------------------
-" Commands and Mappings {{{1
+
+
+" Commands and Mappings
 command BufClose :call CloseBuffer()
 command BufNoNameClose :call CloseNoNameBuffers() 
 command BufHiddenClose :call CloseHiddenBuffers() 
@@ -22,9 +16,9 @@ nnoremap <silent><expr> <Plug>CycleToPreviousBuffer (&ft=='qf' ? ":colder" : <si
 if !&diff
   au BufEnter * silent! lcd %:p:h " change cwd on enter buffer/tab
 endif
-" Commands and Mappings }}}1
-"------------------------------------------------------------------------
-" Functions {{{1
+
+
+" Functions
 func! CloseNoNameBuffers()
   let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
   if !empty(buffers)
@@ -82,8 +76,5 @@ function! s:CycleToNext(direction) abort
   return ':b '.buf
 endfunction
 
-" Functions }}}1
-"------------------------------------------------------------------------
+
 let &cpo=s:cpo_save
-"=============================================================================
-" vim600: set fdm=marker:
