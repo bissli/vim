@@ -49,7 +49,7 @@ set laststatus=2                                                         | " Ala
 set wildcharm=<tab>
 set wildmode=list:longest
 set wildignore=*.o,*~,*.pyc,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-set cmdheight=2
+set cmdheight=1                                                          | " Descrease bottom command window margin
 set hidden                                                               | " Allow buffers to exist in the background
 set whichwrap+=<,>,h,l
 set backspace=indent,eol,start
