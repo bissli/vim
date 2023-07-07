@@ -25,7 +25,6 @@ Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim' 
 Plug 'bissli/ctrlp_bdelete.vim'
 Plug 'bissli/ctrlp-py-matcher'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 " completion / lsp
 Plug 'prabirshrestha/vim-lsp'
