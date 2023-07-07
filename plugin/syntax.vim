@@ -67,7 +67,7 @@ func! SetCellHighlighting()
   " marker: # %%
   let regex_marker = "^#\\s*%%"
   let match_marker_cmd = "syntax match CellMarker \"" . regex_marker . "\""
-  let highlight_marker_cmd = "highlight CellMarker ctermfg=255 guifg=#b9b9b9 ctermbg=022 guibg=#3e3e5e cterm=bold gui=bold"
+  let highlight_marker_cmd = "highlight CellMarker ctermfg=255 guifg=#b9b9b9 ctermbg=022 guibg=#3e3e5e cterm=bold,underline gui=bold,underline"
   if !hlexists('CellMarker')
     execute highlight_marker_cmd
   endif
