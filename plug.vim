@@ -8,6 +8,7 @@ Plug 'vim-scripts/colorsupport.vim'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'bissli/vim-close-duplicate-tabs'
 Plug 'liuchengxu/vista.vim'
+" Plug 'gerw/vim-HiLinkTrace'
 " quickfix
 Plug 'romainl/vim-qf'
 Plug 'romainl/vim-qlist'
