@@ -1,4 +1,4 @@
-if PlugLoaded('ctrlp')
+if PlugLoaded('ctrlp.vim')
 
   let g:ctrlp_cmd = 'CtrlP'
 
