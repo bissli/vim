@@ -363,7 +363,12 @@ nmap <silent><unique>[b <Plug>CycleToPreviousBuffer
 au BufRead,BufNewFile * BufNoNameClose
 
 " Navigation
-nnoremap <silent><C-p> :CtrlP<cr>
+if g:os == 'Linux'
+  nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>
+  nnoremap <silent><C-p><C-f> :Buffers<cr>
+else
+  nnoremap <silent><C-p> :CtrlP<cr>
+endif
 
 " Tag management
 " [t     :tprevious

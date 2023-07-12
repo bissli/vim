@@ -23,10 +23,14 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
-Plug 'ctrlpvim/ctrlp.vim' 
-Plug 'bissli/ctrlp_bdelete.vim'
-Plug 'bissli/ctrlp-py-matcher'
 Plug 'ludovicchabant/vim-gutentags'
+if g:os == 'Linux'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+else
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'bissli/ctrlp_bdelete.vim'
+  Plug 'bissli/ctrlp-py-matcher'
+endif
 " completion / lsp
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
