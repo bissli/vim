@@ -6,11 +6,11 @@ let g:slime_default_config = {
 let g:slime_paste_file = expand($HOME . '/.slime_paste')
 let g:slime_python_ipython = 1
 let g:slime_no_mappings = 1
-let g:slime_cell_delimiter = '^#\\s*%%'
+let g:slime_cell_delimiter = '^#\s*%%'
 
-let g:ipython_cell_send_cell_headers = 1
 let g:ipython_cell_highlight_cells = 0
-let g:ipython_cell_regex = g:slime_cell_delimiter
+let g:ipython_cell_tag = [g:slime_cell_delimiter . '.*']
+let g:ipython_cell_regex = 1 
 
 " nmap <leader>se <Plug>SlimeLineSend
 xmap <leader>se <Plug>SlimeRegionSend
@@ -45,7 +45,6 @@ autocmd FileType python,r let b:key = 'ipython' | call SlimeMappings()
 augroup slime_syntax_cells
   au!
   " au TextChanged,TextChangedI,TextChangedP,BufWinEnter,BufWritePost,FileWritePost
-  au BufReadPost *.py,*.R,*.r call g:SetCellHighlighting()
-  au Syntax * call SyntaxRange#Include('py->', '<-py', 'python', 'Transparent')
-  au Syntax * call SyntaxRange#Include('r->', '<-r', 'r', 'Transparent')
+  au BufReadPost *.R,*.r call g:SetCellHighlighting()
+  au Syntax * call SyntaxRange#Include('language="R"', '\v.*(# \%\%)@=', 'r')
 augroup end

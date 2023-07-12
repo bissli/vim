@@ -34,6 +34,7 @@ runtime plug.vim
 " ---------------------------------------------------------------
 set nocompatible                                                         | " disable legacy compatibility
 set encoding=utf-8                                                       | " Set utf8 as standard encoding
+set fileencoding=utf-8                                                   | " Set utf8 as standard encoding
 set fileformats=unix,dos,mac                                             | " Use Unix as the standard file type
 set autoread                                                             | " Reload files changed outside vim
 set history=1000                                                         | " Store lots of :cmdline history
