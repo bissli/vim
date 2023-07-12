@@ -44,7 +44,7 @@ autocmd FileType python,r let b:key = 'ipython' | call SlimeMappings()
 " python equivalent in jupytext.vim
 augroup slime_syntax_cells
   au!
-  " au TextChanged,TextChangedI,TextChangedP,BufWinEnter,BufWritePost,FileWritePost
+  " au TextChanged,TextChangedI,TextChangedP,BufWinEnter,VimEnter,BufWritePost,FileWritePost
   au BufReadPost *.R,*.r call g:SetCellHighlighting()
   au Syntax * call SyntaxRange#Include('language="R"', '\v.*(# \%\%)@=', 'r')
 augroup end

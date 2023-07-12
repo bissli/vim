@@ -142,8 +142,6 @@ if PlugLoaded('vim-lsp')
       \ 'priority': 10,
       \ 'completor': function('asyncomplete#sources#file#completor')
       \ }))
-  " https://github.com/prabirshrestha/asyncomplete-buffer.vim/issues/17
-  autocmd VimEnter * :doautocmd BufWinEnter
 
   let directories=glob(fnameescape(g:lsp_settings_servers_dir).'/{,.}*/', 1, 1)
   call map(directories, 'fnamemodify(v:val, ":h:t")')
