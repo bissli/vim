@@ -68,7 +68,8 @@ set foldcolumn=0                                                         | " Rem
 set title                                                                | " Put title on top of Vim
 set splitbelow                                                           | " Default to splitting below, not above
 set listchars+=space:␣                                                   | " Show trailing whitespace
-set foldmethod=marker
+set foldmethod=marker | " Placeholder
+set nofoldenable  | " Disable folding
 set display=truncate                                                     | " Show @@@ in the last line if it is truncated.
 set autoindent
 set smartindent
@@ -265,7 +266,7 @@ nnoremap <silent><leader>Sf z=                                  | " Fix word
 " Misc
 " ---------------------------------------------------------------
 " Remove the Windows ^M - when the encodings gets messed up
-"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
