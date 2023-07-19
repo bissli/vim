@@ -65,7 +65,7 @@ Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
 Plug 'preservim/vim-markdown'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
-Plug 'github/copilot.vim', {'for': ['python']}
+Plug 'github/copilot.vim'
 Plug 'rhysd/vim-healthcheck'
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown'] }
