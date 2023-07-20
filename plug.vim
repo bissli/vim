@@ -27,7 +27,7 @@ Plug 'bissli/vmux-clipboard'
 Plug 'airblade/vim-rooter'
 Plug 'ludovicchabant/vim-gutentags'
 if g:os == 'Linux'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } } | Plug 'junegunn/fzf.vim'
 else
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'bissli/ctrlp_bdelete.vim'
