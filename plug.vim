@@ -4,7 +4,9 @@ call plug#begin(expand($HOME.'/.vim/plugged'))
 
 " general 
 Plug 'bissli/inkpot'
-Plug 'vim-scripts/colorsupport.vim'
+if g:os == 'Linux'
+  Plug 'vim-scripts/colorsupport.vim'
+endif
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'bissli/vim-close-duplicate-tabs'
 Plug 'liuchengxu/vista.vim'

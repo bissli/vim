@@ -14,20 +14,19 @@
 "**************************************************************
 
 " ---------------------------------------------------------------
+" Configure Directories
+" ---------------------------------------------------------------
+if has('win32') || has('win64')
+  set runtimepath=$HOME/.vim,$HOME/_vim,$HOME/vimfiles,$VIMRUNTIME
+else
+  set runtimepath=$HOME/.vim,$VIMRUNTIME
+endif
+
+" ---------------------------------------------------------------
 " OS Detection 
 " ---------------------------------------------------------------
 runtime plugin/platform.vim
 call platform#detect()
-
-" ---------------------------------------------------------------
-" Configure Directories
-" ---------------------------------------------------------------
-if has('win32') || has('win64')
-  let $HOME=$USERPROFILE
-  set runtimepath=$USERPROFILE/.vim,$VIMRUNTIME
-else
-  set runtimepath=$HOME/.vim,$VIMRUNTIME
-endif
 
 " ---------------------------------------------------------------
 " Load vim files
