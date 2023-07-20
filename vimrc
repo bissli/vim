@@ -22,7 +22,12 @@ call platform#detect()
 " ---------------------------------------------------------------
 " Configure Directories
 " ---------------------------------------------------------------
-set runtimepath=$HOME/.vim,$VIMRUNTIME
+if has('win32') || has('win64')
+  let $HOME=$USERPROFILE
+  set runtimepath=$USERPROFILE/.vim,$VIMRUNTIME
+else
+  set runtimepath=$HOME/.vim,$VIMRUNTIME
+endif
 
 " ---------------------------------------------------------------
 " Load vim files
