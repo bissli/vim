@@ -22,6 +22,7 @@ Plug 'godlygeek/tabular'
 Plug 'preservim/nerdcommenter'
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
