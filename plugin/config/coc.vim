@@ -33,7 +33,9 @@ if PlugLoaded('coc.nvim')
   set cmdheight=1
   set updatetime=300
   set shortmess+=c
-  set signcolumn=yes
+
+  " background color = editor color
+  set signcolumn=number
 
   " coc multi cursor highlight color
   hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
@@ -89,12 +91,12 @@ if PlugLoaded('coc.nvim')
 
   " jump stuff
   nmap <leader>jd <Plug>(coc-definition)
-  nmap <leader>jy <Plug>(coc-type-definition)
+  nmap <leader>jt <Plug>(coc-type-definition)
   nmap <leader>ji <Plug>(coc-implementation)
   nmap <leader>jr <Plug>(coc-references)
 
   " other coc actions
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  nnoremap <leader>jh :call <SID>show_documentation()<CR>
   nmap <leader>a <Plug>(coc-codeaction-line)
   xmap <leader>a <Plug>(coc-codeaction-selected)
 

@@ -2,7 +2,7 @@ filetype plugin indent on
 
 call plug#begin(expand($HOME.'/.vim/plugged'))
 
-" general 
+" general
 Plug 'bissli/inkpot'
 if g:os == 'Linux'
   Plug 'vim-scripts/colorsupport.vim'
@@ -34,22 +34,26 @@ else
   Plug 'bissli/ctrlp_bdelete.vim'
   Plug 'bissli/ctrlp-py-matcher'
 endif
-" completion / lsp
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-file.vim'
-Plug 'yami-beta/asyncomplete-omni.vim'
-" linting
-Plug 'dense-analysis/ale'
-Plug 'rhysd/vim-lsp-ale'
+if !has('nvim')
+  " completion / lsp
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete-file.vim'
+  Plug 'yami-beta/asyncomplete-omni.vim'
+  " linting
+  Plug 'dense-analysis/ale'
+  Plug 'rhysd/vim-lsp-ale'
+else
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 " snippets
 Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
 " git
 Plug 'tpope/vim-fugitive', !has('win32') ? {} : { 'on': [] }
-Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/conflict-marker.vim'
+if !has('nvim') | Plug 'airblade/vim-gitgutter' | endif
 " db
 Plug 'bissli/dbext.vim', { 'for': ['sql', 'buffer'] }
 " parenthesis/brackets
@@ -69,7 +73,7 @@ Plug 'preservim/vim-markdown'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 Plug 'github/copilot.vim'
-Plug 'rhysd/vim-healthcheck'
+if !has('nvim') | Plug 'rhysd/vim-healthcheck' | endif
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown'] }
 Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }

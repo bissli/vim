@@ -1,32 +1,36 @@
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '>'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '^'
-let g:gitgutter_sign_modified_removed = '<'
+if PlugLoaded('vim-gitgutter')
 
-" background color = editor color
-set signcolumn=number
+  let g:gitgutter_sign_added = '+'
+  let g:gitgutter_sign_modified = '>'
+  let g:gitgutter_sign_removed = '-'
+  let g:gitgutter_sign_removed_first_line = '^'
+  let g:gitgutter_sign_modified_removed = '<'
 
-" diff preview
-func! ToggleGitGutterPreviewHunk() abort
-	" does nothing if that command doesn't exist
-	if !exists(':GitGutterPreviewHunk')
-		return 0
-	endif
-	" loop through all the windows in the current tab page
-	for win in range(1, winnr('$'))
-		" " is it a preview window?
-		let preview_window = getwinvar(win, '&previewwindow') ? win : 0
-	endfor
-	" we have a preview window
-	if preview_window > 0
-		" " close the preview window
-		pclose
-	" we don't have a preview window
-	else
-		" open the preview window
-		GitGutterPreviewHunk
-	endif
-endfunc
+  " background color = editor color
+  set signcolumn=number
 
-au BufEnter *.ipynb exe "GitGutterBufferDisable"
+  " diff preview
+  func! ToggleGitGutterPreviewHunk() abort
+    " does nothing if that command doesn't exist
+    if !exists(':GitGutterPreviewHunk')
+      return 0
+    endif
+    " loop through all the windows in the current tab page
+    for win in range(1, winnr('$'))
+      " " is it a preview window?
+      let preview_window = getwinvar(win, '&previewwindow') ? win : 0
+    endfor
+    " we have a preview window
+    if preview_window > 0
+      " " close the preview window
+      pclose
+    " we don't have a preview window
+    else
+      " open the preview window
+      GitGutterPreviewHunk
+    endif
+  endfunc
+
+  au BufEnter *.ipynb exe "GitGutterBufferDisable"
+
+endif

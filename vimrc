@@ -85,9 +85,6 @@ set smartcase                                                            | " Swi
 set incsearch                                                            | " Do incremental searching when it's possible to timeout.
 set number                                                               | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
-if !has('nvim')
-  set completeopt+=menu,popup,menuone,noselect,noinsert,longest          | " Complete options
-endif
 
 " Because I press this all the time
 command W w
