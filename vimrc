@@ -23,7 +23,7 @@ else
 endif
 
 " ---------------------------------------------------------------
-" OS Detection 
+" OS Detection
 " ---------------------------------------------------------------
 runtime plugin/platform.vim
 call platform#detect()
@@ -43,7 +43,6 @@ set fileformats=unix,dos,mac                                             | " Use
 set autoread                                                             | " Reload files changed outside vim
 set history=1000                                                         | " Store lots of :cmdline history
 set updatetime=100                                                       | " ??
-set completeopt+=menu,popup,menuone,noselect,noinsert,longest            | " Complete options
 set previewheight=15
 set noswapfile                                                           | " No swap file
 set nobackup                                                             | " No backup
@@ -72,8 +71,8 @@ set foldcolumn=0                                                         | " Rem
 set title                                                                | " Put title on top of Vim
 set splitbelow                                                           | " Default to splitting below, not above
 set listchars+=space:␣                                                   | " Show trailing whitespace
-set foldmethod=marker | " Placeholder
-set nofoldenable  | " Disable folding
+set foldmethod=marker                                                    | " Placeholder
+set nofoldenable                                                         | " Disable folding
 set display=truncate                                                     | " Show @@@ in the last line if it is truncated.
 set autoindent
 set smartindent
@@ -86,6 +85,9 @@ set smartcase                                                            | " Swi
 set incsearch                                                            | " Do incremental searching when it's possible to timeout.
 set number                                                               | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
+if !has('nvim')
+  set completeopt+=menu,popup,menuone,noselect,noinsert,longest          | " Complete options
+endif
 
 " Because I press this all the time
 command W w
