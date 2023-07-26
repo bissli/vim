@@ -404,6 +404,13 @@ au BufFilePost * CloseDupTabs
 map <silent><leader>T :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>clear<cr>
 tmap <silent><leader>T :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
 
+" Test
+nmap <silent><leader>zn :TestNearest<CR>
+nmap <silent><leader>zf :TestFile<CR>
+nmap <silent><leader>zs :TestSuite<CR>
+nmap <silent><leader>zl :TestLast<CR>
+nmap <silent><leader>zv :TestVisit<CR>
+
 " Git
 nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gs :Git status<cr>

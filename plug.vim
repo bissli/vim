@@ -70,6 +70,8 @@ Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
 " markdown
 Plug 'preservim/vim-markdown'
+" Testing
+Plug 'vim-test/vim-test'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 Plug 'github/copilot.vim'
