@@ -1,5 +1,8 @@
 filetype plugin indent on
 
+runtime plugin/platform.vim
+call platform#detect()
+
 call plug#begin(expand($HOME.'/.vim/plugged'))
 
 " general
