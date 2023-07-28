@@ -1,4 +1,5 @@
-.netrwhist
-.netrwbook
-.plugged/
-.tags
+plugged
+session
+servers
+autoload
+.vmux_clipboard_data
