@@ -1,0 +1,10 @@
+[submodule "modules/dotbot"]
+	path = modules/dotbot
+	url = https://github.com/anishathalye/dotbot
+	branch = master
+	ignore = dirty
+[submodule "modules/dotbot-crossplatform"]
+	path = modules/dotbot-crossplatform
+	url = https://github.com/msdrigg/dotbot-crossplatform.git
+	branch = master
+	ignore = dirty
