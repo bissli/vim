@@ -30,27 +30,17 @@ Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
 Plug 'ludovicchabant/vim-gutentags'
-if g:os == 'Linux'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } } | Plug 'junegunn/fzf.vim'
-else
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'bissli/ctrlp_bdelete.vim'
-  Plug 'bissli/ctrlp-py-matcher'
-endif
-if !has('nvim')
-  " completion / lsp
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/asyncomplete-file.vim'
-  Plug 'yami-beta/asyncomplete-omni.vim'
-  " linting
-  Plug 'dense-analysis/ale'
-  Plug 'rhysd/vim-lsp-ale'
-else
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } } | Plug 'junegunn/fzf.vim'
+" completion / lsp
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
+" linting
+Plug 'dense-analysis/ale'
+Plug 'rhysd/vim-lsp-ale'
 " snippets
 Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
 " git
