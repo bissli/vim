@@ -39,6 +39,7 @@ if PlugLoaded('vim-lsp')
   au Filetype snippets setlocal noexpandtab " requires explicit tab
 
   func! TryUltiSnips()
+    let g:ulti_expand_or_jump_res = 0
     if !pumvisible()
         call UltiSnips#ExpandSnippetOrJump()
     endif
