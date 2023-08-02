@@ -155,23 +155,25 @@ if PlugLoaded('vim-lsp')
   let directories=glob(fnameescape(g:lsp_settings_servers_dir).'/{,.}*/', 1, 1)
   call map(directories, 'fnamemodify(v:val, ":h:t")')
 
-  let g:lsp_settings_filetype_python = []
+  let g:lsp_settings_filetype_python = ['jedi-language-server', 'pylsp']
 
   if index(directories, 'jedi-language-server') != -1
+    call remove(g:lsp_settings_filetype_python, 'jedi-language-server')
     call add(g:lsp_settings_filetype_python, 'jedi-language-server~')
   endif
 
   if index(directories, 'pylsp') != -1
+    call remove(g:lsp_settings_filetype_python, 'pylsp')
     call add(g:lsp_settings_filetype_python, 'pylsp~')
   endif
 
   let g:jedi_language_server_path = g:lsp_settings_servers_dir . 'jedi-language-server/jedi-language-server'
+  let g:pylsp_language_server_path = g:lsp_settings_servers_dir . 'pylsp/pylsp'
 
-  if executable('pylsp~DISABLE')
-      " brew install python-lsp-server
+  if executable(g:pylsp_language_server_path)
       au User lsp_setup call lsp#register_server({
         \ 'name': 'pylsp~',
-        \ 'cmd': {server_info->['pylsp']},
+        \ 'cmd': {server_info->[g:pylsp_language_server_path]},
         \ 'allowlist': ['python'],
         \ 'workspace_config':
         \ {'pylsp':
