@@ -156,7 +156,11 @@ if PlugLoaded('vim-lsp')
   let directories=glob(fnameescape(g:lsp_settings_servers_dir).'/{,.}*/', 1, 1)
   call map(directories, 'fnamemodify(v:val, ":h:t")')
 
-  let g:lsp_settings_filetype_python = ['jedi-language-server', 'pylsp']
+  let g:lsp_settings_filetype_python = [
+      \ 'jedi-language-server',
+      \ 'pylsp',
+      \ 'ruff-lsp'
+      \]
 
   if index(directories, 'jedi-language-server') != -1
     call remove(g:lsp_settings_filetype_python, 'jedi-language-server')
@@ -168,8 +172,15 @@ if PlugLoaded('vim-lsp')
     call add(g:lsp_settings_filetype_python, 'pylsp~')
   endif
 
+  if index(directories, 'ruff-lsp') != -1
+    call remove(g:lsp_settings_filetype_python, 'ruff-lsp')
+    call remove(g:lsp_settings_filetype_python, 'ruff-lsp')
+    call add(g:lsp_settings_filetype_python, 'ruff-lsp~')
+  endif
+
   let g:jedi_language_server_path = g:lsp_settings_servers_dir . 'jedi-language-server/jedi-language-server'
   let g:pylsp_language_server_path = g:lsp_settings_servers_dir . 'pylsp/pylsp'
+  let g:ruff_language_server_path = g:lsp_settings_servers_dir . 'ruff-lsp/ruff-lsp'
 
   if executable(g:pylsp_language_server_path)
       au User lsp_setup call lsp#register_server({
@@ -212,6 +223,13 @@ if PlugLoaded('vim-lsp')
         \		'didSave': v:false,
         \	},
         \ },
+        \ })
+  endif
+  if executable(g:ruff_language_server_path)
+      au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff-lsp~',
+        \ 'cmd': {server_info->[g:ruff_language_server_path]},
+        \ 'allowlist': ['python']
         \ })
   endif
 
