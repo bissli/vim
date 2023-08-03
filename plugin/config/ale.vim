@@ -9,9 +9,9 @@ if PlugLoaded('ale')
   \   '\.min\.js$'    : {'ale_enabled': 0},
   \   '\.min\.css$'   : {'ale_enabled': 0},
   \}
-  let g:ale_enabled = 0
-  let g:ale_open_list = 1
-  let g:ale_set_signs = 0
+  let g:ale_enabled = 1
+  let g:ale_open_list = 0
+  let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
   let g:ale_sign_error = "~"
   let g:ale_sign_warning = "~"
@@ -20,13 +20,15 @@ if PlugLoaded('ale')
   let g:ale_use_global_executables = 1
 
   " auto env (cd managed by smartcd)
-  let g:ale_python_auto_pipenv = 0
-  let g:ale_python_auto_poetry = 0
-  let g:ale_python_auto_virtualenv = 0
-  let g:ale_python_flake8_auto_poetry = 0
-  let g:ale_python_flake8_auto_pipenv = 0
-  let g:python_pylint_auto_pipenv = 0
-  let g:python_pylint_auto_poetry = 0
+  let g:ale_python_auto_pipenv = 1
+  let g:ale_python_auto_poetry = 1
+  let g:ale_python_auto_virtualenv = 1
+  let g:ale_python_flake8_auto_pipenv = 1
+  let g:ale_python_flake8_auto_poetry = 1
+  let g:python_pylint_auto_pipenv = 1
+  let g:python_pylint_auto_poetry = 1
+  let g:python_isort_auto_pipenv = 1
+  let g:python_isort_auto_poetry = 1
 
   " => lint
   let g:ale_linters = {
@@ -40,8 +42,8 @@ if PlugLoaded('ale')
 	  \'matlab': ['mlint'],
   \}
   let g:ale_lint_on_text_changed = 'never'
-  let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_save = 0
+  let g:ale_lint_on_enter = 1
+  let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 0
   let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_filetype_changed = 0
@@ -69,18 +71,19 @@ if PlugLoaded('ale')
   "   E402 do not assign a lamda expression, use a def
   "   E501 line too long
   "   E722 do not use bare 'except'
-  "   E731 do not assign a lambda expression, use a def 
-  "   E1101 no-member: Instance of 'foo' has no 'bar' member 
+  "   E731 do not assign a lambda expression, use a def
+  "   E1101 no-member: Instance of 'foo' has no 'bar' member
   "   W503 line break occurred before a binary operator
   "   W504 module level importnot at top of file
   "   S001, B005, B006, B007, B008, B009, B010, B011, B015, B301 (for mypy compatability)
   let s:errors = 'E121,E124,E126,E128,E201,E203,E221,E222,E231,E241,E251,E272,E301,E402,E501,E722,E731,E1101'
-  let s:warnings = 'W501,W503,W504' 
+  let s:warnings = 'W501,W503,W504'
   let s:other = 'S001,B005,B006,B007,B008,B009,B010,B011,B015,B301'
-  let g:pep8_ignore = s:errors . ',' . s:warnings . ',' . s:other 
+  let g:pep8_ignore = s:errors . ',' . s:warnings . ',' . s:other
   let g:ale_python_flake8_options='--ignore='.pep8_ignore.' --max-line-length=119'
   let g:ale_python_pylint_options='--disable=all --enable=F,E,unused-variable,unused-import,unreachable,duplicate_key,wrong-import-order,unecessary-pass'
   let g:ale_python_autoflake_options = "--remove-all-unused-imports --expand-star-imports --ignore-init-module-imports"
+  let g:ale_python_isort_options = "--profile black --line-length 119 --skip-gitignore"
 
   " => fix / format
 
