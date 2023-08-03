@@ -9,10 +9,10 @@ if PlugLoaded('vim-lsp')
   let g:lsp_document_highlight_enabled = 0
   let g:lsp_format_sync_timeout = 1000
   let g:lsp_document_code_action_signs_enabled = 0
-  let g:lsp_preview_float = 0
-  let g:lsp_signature_help_enabled = 0
+  let g:lsp_preview_float = 1
+  let g:lsp_signature_help_enabled = 1
   let g:lsp_semantic_enabled = 1
-  let g:lsp_log_verbose = 1
+  let g:lsp_log_verbose = 0
   let g:lsp_log_file = expand($HOME.'/.vim/vim-lsp.log')
   " vim-lsp-settings options
   let g:lsp_settings_servers_dir = expand($HOME.'/.vim/servers/')
@@ -20,8 +20,8 @@ if PlugLoaded('vim-lsp')
   let g:lsp_settings_root_markers = ['.fzf', '.root']
   let g:lsp_settings_enable_suggestions = 0
   " asyncomplete options
-  let g:asyncomplete_auto_popup = 0
-  let g:asyncomplete_auto_completeopt = 0
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_min_chars = 2
   let g:asyncomplete_remove_duplicates = 0
   let g:asyncomplete_smart_completion = 0
