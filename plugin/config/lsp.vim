@@ -5,7 +5,7 @@ if PlugLoaded('vim-lsp')
   endif
 
   " vim-lsp options
-  let g:lsp_diagnostics_enabled = 0
+  let g:lsp_diagnostics_enabled = 1
   let g:lsp_document_highlight_enabled = 0
   let g:lsp_format_sync_timeout = 1000
   let g:lsp_document_code_action_signs_enabled = 0
@@ -14,6 +14,9 @@ if PlugLoaded('vim-lsp')
   let g:lsp_semantic_enabled = 1
   let g:lsp_log_verbose = 0
   let g:lsp_log_file = expand($HOME.'/.vim/vim-lsp.log')
+  " vim-lsp-ale options
+  let g:lsp_ale_auto_config_vim_lsp = 1
+  let g:lsp_ale_auto_enable_linters = 0
   " vim-lsp-settings options
   let g:lsp_settings_servers_dir = expand($HOME.'/.vim/servers/')
   let g:lsp_settings_global_settings_dir = expand($HOME.'/.config/vim-lsp/')
