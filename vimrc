@@ -120,7 +120,7 @@ function s:auto_termguicolors()
     if !(exists("+termguicolors"))
         return
     endif
-    if &term =~ '\v(tmux|screen|xterm)-256color'
+    if &term =~ '\v(tmux|xterm)-256color'
         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
         let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
         set termguicolors
@@ -222,7 +222,7 @@ set viminfo^=%
 " Only xterm can grab the mouse events when using the shift key, for other
 " terminals use ":", select text and press Esc.
 if has('mouse')
-  if &term =~ 'xterm'
+  if &term =~ '\v(xterm|tmux)'
     set mouse=a
   else
     set mouse=nvi

@@ -3,3 +3,4 @@ session
 servers
 autoload
 .vmux_clipboard_data
+.netrwhist

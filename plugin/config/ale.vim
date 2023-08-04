@@ -9,7 +9,7 @@ if PlugLoaded('ale')
   \   '\.min\.js$'    : {'ale_enabled': 0},
   \   '\.min\.css$'   : {'ale_enabled': 0},
   \}
-  let g:ale_enabled = 1
+  let g:ale_enabled = 0
   let g:ale_open_list = 0
   let g:ale_set_signs = 1
   let g:ale_set_highlights = 0
@@ -74,7 +74,7 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['black', 'ruff'],
+	  \'python'     : ['ruff', 'black'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
