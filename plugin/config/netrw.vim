@@ -1,5 +1,3 @@
-if !exists('g:loaded_netrwPlugin') | finish | endif
-
 " => Netrw
 " tree style-listing
 let g:netrw_liststyle = 3

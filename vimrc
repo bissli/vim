@@ -410,18 +410,9 @@ nmap <silent><leader>zv :TestVisit<CR>
 " Git
 nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gs :Git status<cr>
-nnoremap <leader>gL :call GitCommand("lg")<cr>
-nnoremap <leader>gl :call GitCommand("log")<cr>
-nnoremap <leader>gr :call GitCommand("reflog")<cr>
-nnoremap <Leader>gh :Silent Glog<cr>
-nnoremap <Leader>gH :Silent Glog<cr>:set nofoldenable<cr>
+nnoremap <leader>gl :Git log -p -- %<cr>
+nnoremap <leader>gL :Git log<cr>
 nnoremap <Leader>gd :Gdiffsplit<cr>
-nnoremap <Leader>gc :Git commit<cr>
-nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
-nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
-" nnoremap <Leader>gr :Gread<CR>
-" nnoremap <Leader>gw :Gwrite<CR>
-" nnoremap <Leader>gp :Git push<CR>
 nmap <Leader>ga <Plug>(GitGutterStageHunk)
 nmap <Leader>gu <Plug>(GitGutterUndoHunk)
 nnoremap <silent><Leader>gp :call ToggleGitGutterPreviewHunk()<cr>
