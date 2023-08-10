@@ -252,6 +252,13 @@ map 0 ^
 map j gj
 map k gk
 
+" Escape with jk or jk in insert mode
+inoremap jk <esc>
+inoremap kj <esc>
+
+" q means quit
+nnoremap q :q<cr>
+
 " [t]e -> [tab]edit
 cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'edit' : 'e'
 cnoreabbrev <expr> te getcmdtype() == ":" && getcmdline() == 'te' ? 'tabedit' : 'te'
@@ -259,7 +266,6 @@ cnoreabbrev <expr> te getcmdtype() == ":" && getcmdline() == 'te' ? 'tabedit' : 
 " ---------------------------------------------------------------
 " Spell checking
 " ---------------------------------------------------------------
-
 map <silent><leader>ss :setlocal spell!<cr>                     | " Pressing ,ss will toggle and untoggle spell checking
 nnoremap <silent><leader>Ss :setlocal spell spelllang=en_us<cr> | " Activate spelling
 nnoremap <silent><leader>SS :setlocal nospell<cr>               | " Disable spelling
@@ -408,10 +414,10 @@ nmap <silent><leader>zl :TestLast<CR>
 nmap <silent><leader>zv :TestVisit<CR>
 
 " Git
-nnoremap <Leader>gb :Git blame<cr>
+nnoremap <Leader>gb :TigBlame<cr>
 nnoremap <Leader>gs :Git status<cr>
-nnoremap <leader>gl :Git log -p -- %<cr>
-nnoremap <leader>gL :Git log<cr>
+nnoremap <Leader>gl :TigOpenCurrentFile<CR>
+nnoremap <leader>gL :TigOpenProjectRootDir<cr>
 nnoremap <Leader>gd :Gdiffsplit<cr>
 nmap <Leader>ga <Plug>(GitGutterStageHunk)
 nmap <Leader>gu <Plug>(GitGutterUndoHunk)

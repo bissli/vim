@@ -45,8 +45,9 @@ Plug 'rhysd/vim-lsp-ale'
 Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
 " git
 Plug 'tpope/vim-fugitive', !has('win32') ? {} : { 'on': [] }
+Plug 'iberianpig/tig-explorer.vim', !has('win32') ? {} : { 'on': [] }
 Plug 'rhysd/conflict-marker.vim'
-if !has('nvim') | Plug 'airblade/vim-gitgutter' | endif
+Plug 'airblade/vim-gitgutter'
 " db
 Plug 'bissli/dbext.vim', { 'for': ['sql', 'buffer'] }
 " parenthesis/brackets
@@ -68,7 +69,7 @@ Plug 'vim-test/vim-test'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 Plug 'github/copilot.vim'
-if !has('nvim') | Plug 'rhysd/vim-healthcheck' | endif
+Plug 'rhysd/vim-healthcheck'
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown'] }
 Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
