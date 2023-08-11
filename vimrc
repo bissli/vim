@@ -143,19 +143,21 @@ set background=dark
 " ---------------------------------------------------------------
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
-    set guioptions-=t
-    set guioptions-=e
-    " set guitablabel=%M\ %t
+  set guioptions-=T
+  set guioptions-=t
+  set guioptions-=e
+  set guioptions-=r
+  " set guitablabel=%M\ %t
+  set guifont=FiraCodeNF-Reg:h13
 endif
 
 " cursor options (blink insert, not on normal)
 if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
 else
-    let &t_SI = "\e[5 q"
-    let &t_EI = "\e[2 q"
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[2 q"
 endif
 
 " Vimdiff
