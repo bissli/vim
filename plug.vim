@@ -49,7 +49,7 @@ Plug 'iberianpig/tig-explorer.vim', !has('win32') ? {} : { 'on': [] }
 Plug 'rhysd/conflict-marker.vim'
 Plug 'airblade/vim-gitgutter'
 " db
-Plug 'bissli/dbext.vim', { 'for': ['sql', 'buffer'] }
+Plug 'collinpeters/dbext.vim', { 'for': ['sql', 'buffer'] }
 " parenthesis/brackets
 Plug 'tpope/vim-endwise'
 Plug 'cohama/lexima.vim'
