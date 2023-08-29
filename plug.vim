@@ -76,7 +76,7 @@ Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
 
 call plug#end()
 
-func! g:PlugLoaded(name)
+func! PlugLoaded(name)
     return (
         \ has_key(g:plugs, a:name) &&
         \ isdirectory(g:plugs[a:name].dir) &&
