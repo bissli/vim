@@ -74,7 +74,7 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['ruff', 'yapf'],
+	  \'python'     : ['ruff'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
@@ -89,7 +89,7 @@ if PlugLoaded('ale')
   let g:ale_fix_on_enter = 0
   let g:ale_javascript_prettier_use_local_config = 0
   let g:ale_sql_pgformatter_options = "--spaces 4 --comma-break --function-case 1 --keyword-case 1 --type-case 1"
-  " let g:ale_python_black_options = '--line-length 119 --skip-string-normalization'
+  let g:ale_python_black_options = '--line-length 88 --skip-string-normalization'
   let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_html_beautify_options = '--indent-size 2'
@@ -97,7 +97,11 @@ if PlugLoaded('ale')
   func! g:SqlformatFormatRange() range
 	  exe ":'<,'> !sqlformat " . g:ale_sql_sqlformat_options
   endfunc
-
   au Filetype sql exec 'xnoremap <silent><buffer><leader>ja <Esc>:call SqlformatFormatRange()<cr>'
+
+  func! g:BlackformatFormatRange() range
+	  exe ":'<,'> !black-macchiato " . g:ale_python_black_options
+  endfunc
+  au Filetype python exec 'xnoremap <silent><buffer><leader>jb <Esc>:call BlackformatFormatRange()<cr>'
 
 endif
