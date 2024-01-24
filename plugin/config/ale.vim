@@ -74,7 +74,7 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['ruff', 'black'],
+	  \'python'     : ['ruff', 'yapf'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
@@ -89,7 +89,7 @@ if PlugLoaded('ale')
   let g:ale_fix_on_enter = 0
   let g:ale_javascript_prettier_use_local_config = 0
   let g:ale_sql_pgformatter_options = "--spaces 4 --comma-break --function-case 1 --keyword-case 1 --type-case 1"
-  let g:ale_python_black_options = '--line-length 119 --skip-string-normalization'
+  " let g:ale_python_black_options = '--line-length 119 --skip-string-normalization'
   let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_html_beautify_options = '--indent-size 2'

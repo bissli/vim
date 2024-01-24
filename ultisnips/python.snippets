@@ -15,7 +15,7 @@ def get_quoting_style(snip):
 endglobal
 
 # -----------------------------------------------------------
-# => Misc 
+# => Misc
 # -----------------------------------------------------------
 
 # Lambda
@@ -27,8 +27,18 @@ snippet lde "lambda x: x.foo == bar" i
 lambda ${1:x}: $1.${2:var} ${3:==} ${0:comparsion}
 endsnippet
 
-snippet ldf "v = lambda x: f(x)" i 
+snippet ldf "v = lambda x: f(x)" i
 ${1:var} = lambda ${2:vars}: ${0:action}
+endsnippet
+
+# debug
+snippet tryp "Try / Except-PDB" b
+try:
+	${1:${VISUAL:pass}}
+except:
+  __import__('pdb').set_trace()
+	raise
+$0
 endsnippet
 
 # jupyter / slime
@@ -51,18 +61,16 @@ endsnippet
 
 snippet iftest "iftest" b
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	__import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).test_mod() 
+	__import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod()
 endsnippet
 
 snippet scp "slime cell [python]" bw
 # %%
 ${0}
-
 endsnippet
 
 snippet scr "slime cell [r]" bw
-# %% language="R" 
+# %% language="R"
 %%R
 ${0}
-
 endsnippet

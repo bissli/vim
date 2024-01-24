@@ -75,6 +75,7 @@ if PlugLoaded('vim-lsp')
     setlocal omnifunc=lsp#complete
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> <leader>jd <plug>(lsp-definition)
+    nmap <buffer> <leader>jD :vsplit<cr><plug>(lsp-definition)
     nmap <buffer> <leader>jr <plug>(lsp-references)
     nmap <buffer> <leader>js <plug>(lsp-document-symbol-search)
     nmap <buffer> <leader>jS <plug>(lsp-workspace-symbol-search)

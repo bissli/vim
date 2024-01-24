@@ -11,8 +11,8 @@ if g:os == 'Linux'
   Plug 'vim-scripts/colorsupport.vim'
 endif
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'bissli/vim-close-duplicate-tabs'
-Plug 'liuchengxu/vista.vim'
+Plug 'sorribas/vim-close-duplicate-tabs'
+Plug 'preservim/tagbar'
 " Plug 'gerw/vim-HiLinkTrace'
 " quickfix
 Plug 'romainl/vim-qf'
@@ -25,7 +25,6 @@ Plug 'godlygeek/tabular'
 Plug 'preservim/nerdcommenter'
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'bissli/vmux-clipboard'
 " searching
 Plug 'airblade/vim-rooter'
@@ -61,7 +60,11 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
 Plug 'jalvesaq/R-Vim-runtime', { 'for': ['r'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }
+Plug 'jimf/vim-pep8-text-width', { 'for': ['python'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
+Plug 'inkarkat/vim-ExtractMatches'
+Plug 'inkarkat/vim-ingo-library'
+Plug 'pixelneo/vim-python-docstring', { 'for': ['python'] }
 " markdown
 Plug 'preservim/vim-markdown'
 " Testing

@@ -311,6 +311,7 @@ au BufRead /tmp/ssql.edit.* set filetype=sql
 au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
 au BufRead,BufNewFile *.ipynb set filetype=ipynb
+au BufRead,BufNewFile *.py setl colorcolumn=88  " temp workaround while I investigate why after/ftplugin/python.vim not loading
 au BufRead,BufNewFile *ideavimrc set filetype=vim
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 au FocusGained * :redraw!
@@ -359,11 +360,6 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 " <C-w>R | " Swap top/bottom or left/right split
 " <C-w>T | " Break out current window into a new tabview
 " <C-w>o | " Close every window in the current tabview but the current one
-
-nnoremap <C-h> <C-w>h                                       | " Switch window left
-nnoremap <C-j> <C-w>j                                       | " Switch window down
-nnoremap <C-k> <C-w>k                                       | " Switch window up
-nnoremap <C-l> <C-w>l                                       | " Switch window right
 
 " Buffer management
 " [B     :bfirst
@@ -416,7 +412,7 @@ nmap <silent><leader>zl :TestLast<CR>
 nmap <silent><leader>zv :TestVisit<CR>
 
 " Git
-nnoremap <Leader>gb :TigBlame<cr>
+nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gs :Git status<cr>
 nnoremap <Leader>gl :TigOpenCurrentFile<CR>
 nnoremap <leader>gL :TigOpenProjectRootDir<cr>
