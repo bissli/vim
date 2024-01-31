@@ -17,9 +17,9 @@
 " Configure Directories
 " ---------------------------------------------------------------
 if has('win32') || has('win64')
-  set runtimepath=$HOME/.vim,$HOME/_vim,$HOME/vimfiles,$VIMRUNTIME
+  set runtimepath+=$HOME/.vim,$HOME/_vim,$HOME/vimfiles,$VIMRUNTIME
 else
-  set runtimepath=$HOME/.vim,$VIMRUNTIME
+  set runtimepath+=$HOME/.vim
 endif
 
 " ---------------------------------------------------------------
@@ -75,7 +75,6 @@ set foldmethod=marker                                                    | " Pla
 set nofoldenable                                                         | " Disable folding
 set display=truncate                                                     | " Show @@@ in the last line if it is truncated.
 set autoindent
-set smartindent
 set scrolloff=5                                                          | " Show a few lines of context around the cursor.
 set smarttab
 set showbreak=->
@@ -311,7 +310,6 @@ au BufRead /tmp/ssql.edit.* set filetype=sql
 au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
 au BufRead,BufNewFile *.ipynb set filetype=ipynb
-au BufRead,BufNewFile *.py setl colorcolumn=88  " temp workaround while I investigate why after/ftplugin/python.vim not loading
 au BufRead,BufNewFile *ideavimrc set filetype=vim
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 au FocusGained * :redraw!

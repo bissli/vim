@@ -60,7 +60,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
 Plug 'jalvesaq/R-Vim-runtime', { 'for': ['r'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }
-Plug 'jimf/vim-pep8-text-width', { 'for': ['python'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
 Plug 'inkarkat/vim-ExtractMatches'
 Plug 'inkarkat/vim-ingo-library'
