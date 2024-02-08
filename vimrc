@@ -408,6 +408,7 @@ nmap <silent><leader>zf :TestFile<CR>
 nmap <silent><leader>zs :TestSuite<CR>
 nmap <silent><leader>zl :TestLast<CR>
 nmap <silent><leader>zv :TestVisit<CR>
+" <leader>zt -> run doctest for function under cursor
 
 " Git
 nnoremap <Leader>gb :Git blame<cr>
@@ -423,11 +424,9 @@ if ! &diff
 	nmap [g <Plug>(GitGutterPrevHunk)
 endif
 
-" " Window Swap
-" let g:windowswap_map_keys = 0
-" nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<cr>
-" nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<cr>
-" nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<cr>
+" Window Swap
+" <leader>ww -> yank
+" <leader>ww -> paste
 
 " Format
 nnoremap <silent><leader>ja :ALEFix<cr>
@@ -462,3 +461,9 @@ nnoremap <leader>jj :%s/<c-r>=expand("<cword>")<cr>/
 nnoremap <leader>co :botright copen<cr>
 nnoremap <leader>cx :cclose<cr>
 nmap <silent>\ <Plug>(qf_qf_toggle)
+
+" Align
+" " Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)

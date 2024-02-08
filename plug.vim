@@ -13,6 +13,7 @@ endif
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'sorribas/vim-close-duplicate-tabs'
 Plug 'preservim/tagbar'
+Plug 'wesQ3/vim-windowswap'
 " Plug 'gerw/vim-HiLinkTrace'
 " quickfix
 Plug 'romainl/vim-qf'
@@ -21,6 +22,7 @@ Plug 'stefandtw/quickfix-reflector.vim'
 " mappings
 Plug 'tpope/vim-unimpaired'
 " text
+Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular'
 Plug 'preservim/nerdcommenter'
 " tmux
@@ -68,6 +70,7 @@ Plug 'pixelneo/vim-python-docstring', { 'for': ['python'] }
 Plug 'preservim/vim-markdown'
 " Testing
 Plug 'vim-test/vim-test'
+Plug 'lambdalisue/doctest.vim'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 Plug 'github/copilot.vim'
