@@ -188,8 +188,13 @@ if PlugLoaded('ale')
   au Filetype sql exec 'xnoremap <silent><buffer><leader>ja <Esc>:call SqlformatFormatRange()<cr>'
 
   func! g:BlackformatFormatRange() range
-	  exe ":'<,'> !black-macchiato " . g:ale_python_black_options
+    exe ":'<,'> !black-macchiato " . g:ale_python_black_options
   endfunc
   au Filetype python exec 'xnoremap <silent><buffer><leader>jb <Esc>:call BlackformatFormatRange()<cr>'
+
+  func! g:YapfformatFormatRange() range
+	  exe ":'<,'> !yapf-rangef "
+  endfunc
+  au Filetype python exec 'xnoremap <silent><buffer><leader>jy <Esc>:call YapfformatFormatRange()<cr>'
 
 endif

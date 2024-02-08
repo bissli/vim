@@ -58,9 +58,9 @@ function! s:GetCurrentTextWidth()
     let c = col(".")
     let curr_syntax = synIDattr(synIDtrans(synID(r, c, 0)), "name")
     let prev_syntax = synIDattr(synIDtrans(synID(r, c-1, 0)), "name")
-    let next_syntax = synIDattr(synIDtrans(synID(r, c+1, 0)), "name")
-    let above_syntax = synIDattr(synIDtrans(synID(r-1, c, 0)), "name")
-    let below_syntax = synIDattr(synIDtrans(synID(r+1, c, 0)), "name")
+    " let next_syntax = synIDattr(synIDtrans(synID(r, c+1, 0)), "name")
+    " let above_syntax = synIDattr(synIDtrans(synID(r-1, c, 0)), "name")
+    " let below_syntax = synIDattr(synIDtrans(synID(r+1, c, 0)), "name")
     " echom "[" . above_syntax . "],[" . prev_syntax . "],[" . curr_syntax . "],[". next_syntax . "],[" . below_syntax . "]"
     if curr_syntax =~ 'Comment\|Todo' || prev_syntax =~ 'Comment\|Todo'
         return g:py_comment_text_width
