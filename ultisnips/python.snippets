@@ -34,10 +34,10 @@ endsnippet
 # debug
 snippet tryp "Try / Except-PDB" b
 try:
-	${1:${VISUAL:pass}}
-except:
+  ${1:${VISUAL:pass}}
+except Exception as exc:
   __import__('pdb').set_trace()
-	raise
+  raise
 $0
 endsnippet
 
@@ -52,6 +52,10 @@ snippet we "Write collection to Excel" i
 import os; ${1:pos}.write_excel(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.xlsx'));$0
 endsnippet
 
+snippet wc "Write collection to CSV" i
+import os; ${1:pos}.write_csv(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.csv'));$0
+endsnippet
+
 snippet wf "Write text to file" i
 import os
 with open(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.${4:txt}'), 'w+') as f:
@@ -59,9 +63,19 @@ with open(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.${4:t
 $0
 endsnippet
 
-snippet iftest "iftest" b
+# "NORMALIZE_WHITESPACE | ELLIPSIS | IGNORE_EXCEPTION_DETAIL"
+snippet iftest "default" b
+
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-	__import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod()
+    __import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod(optionflags=4 | 8 | 32)
+endsnippet
+
+snippet iftest "logger-cmd" b
+
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+    __import__(`!p snip.rv = get_quoting_style(snip)`libb`!p snip.rv = get_quoting_style(snip)`).configure_logging(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
+    logger = __import__(`!p snip.rv = get_quoting_style(snip)`logging`!p snip.rv = get_quoting_style(snip)`).getLogger(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
+    __import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod(optionflags=4 | 8 | 32)
 endsnippet
 
 snippet scp "slime cell [python]" bw
