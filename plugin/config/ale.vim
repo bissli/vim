@@ -150,7 +150,7 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['ruff', 'autopep8'],
+	  \'python'     : ['isort', 'ruff', 'autopep8'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
@@ -185,6 +185,7 @@ if PlugLoaded('ale')
   let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
   let g:ale_html_beautify_options = '--indent-size 2'
+  let g:ale_isort_use_global = 1
 
   func! g:SqlformatFormatRange() range
 	  exe ":'<,'> !sqlformat " . g:ale_sql_sqlformat_options
