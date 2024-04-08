@@ -70,12 +70,30 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
     __import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod(optionflags=4 | 8 | 32)
 endsnippet
 
+snippet iftest "default-func" b
+
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+    import doctest, sys  # noqa
+    if len(sys.argv) < 2:
+        doctest.testmod(optionflags=4 | 8 | 32)
+    else:
+        for f in sys.argv[1:]:
+            doctest.run_docstring_examples(globals()[f], globals())
+endsnippet
+
 snippet iftest "logger-cmd" b
 
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-    __import__(`!p snip.rv = get_quoting_style(snip)`libb`!p snip.rv = get_quoting_style(snip)`).configure_logging(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
-    logger = __import__(`!p snip.rv = get_quoting_style(snip)`logging`!p snip.rv = get_quoting_style(snip)`).getLogger(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
-    __import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod(optionflags=4 | 8 | 32)
+    import libb, logging, doctest, sys  # noqa
+    libb.configure_logging(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
+    logger = logging.getLogger(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
+    doctest.testmod(optionflags=4 | 8 | 32)
+endsnippet
+
+snippet iftest "pytest" b
+
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+    __import__(`!p snip.rv = get_quoting_style(snip)`pytest`!p snip.rv = get_quoting_style(snip)`).main([__file__])
 endsnippet
 
 snippet scp "slime cell [python]" bw
