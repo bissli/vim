@@ -42,7 +42,7 @@ endfunc
 " => context-aware textwidth (from vim-pep8-text-width)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:py_code_text_width=79
-let g:py_comment_text_width=70
+let g:py_comment_text_width=72
 let g:py_string_text_width=119
 
 augroup pep8textwidth
