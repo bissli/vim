@@ -57,6 +57,7 @@ Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html'] }
 Plug 'valloric/MatchTagAlways', { 'for': ['html'] }
 " language tools / syntax
+Plug 'dbmrq/vim-chalk'
 Plug 'inkarkat/vim-SyntaxRange'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
@@ -73,7 +74,7 @@ Plug 'vim-test/vim-test'
 Plug 'lambdalisue/doctest.vim'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'rhysd/vim-healthcheck'
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown'] }
