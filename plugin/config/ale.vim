@@ -21,7 +21,7 @@ if PlugLoaded('ale')
 
   " => lint
   let g:ale_linters = {
-	  \'javascript': ['eslint'],
+	  \'javascript': ['deno'],
 	  \'python': ['vim-lsp'],
 	  \'go': ['go', 'golint', 'errcheck'],
 	  \'cpp': ['clangtidy'],
@@ -48,7 +48,6 @@ if PlugLoaded('ale')
   " see pypi.org/project/autopep8/
   " INCLUDE LIST:
   let _pep8_include_list = [
-    \ 'E11',  'Fix indentation.',
     \ 'E124', 'Align closing bracket to match visual indentation.',
     \ 'E127', 'Fix visual indentation.',
     \ 'E128', 'Fix visual indentation.',
@@ -60,7 +59,6 @@ if PlugLoaded('ale')
     \ 'E26',  'Fix spacing after comment hash for inline comments.',
     \ 'E265', 'Fix spacing after comment hash for block comments.',
     \ 'E266', 'Fix too many leading tripple quote for block comments.',
-    \ 'E301', 'Add missing blank line.',
     \ 'E302', 'Add missing 2 blank lines.',
     \ 'E303', 'Remove extra blank lines.',
     \ 'E304', 'Remove blank line following function decorator.',
@@ -89,6 +87,7 @@ if PlugLoaded('ale')
     \ 'E201', 'Whitepace after [.',
     \ 'E203', 'Space before :.',
     \ 'E211', 'Remove extraneous whitespace.',
+    \ 'E301', 'Add missing blank line.',
     \ 'E22',  'Fix extraneous whitespace around keywords.',
     \ 'E221', 'Multiple spaces before operator.',
     \ 'E222', 'Multiple spaces after operator.',
@@ -111,6 +110,7 @@ if PlugLoaded('ale')
     \ 'E722', 'Fix bare except.',
     \ 'E731', 'Use a def when use do not assign a lambda expression.',
     \ 'W503', 'Fix line break before binary operator.',
+    \ 'E11',  'Fix indentation.',
     \ 'W504', 'Fix line break after binary operator.',
     \ 'W605', 'Fix invalid escape sequence x.',
     \ ]
@@ -145,8 +145,7 @@ if PlugLoaded('ale')
   let g:ale_fixers = {
 	  \'*'          : ['remove_trailing_lines', 'trim_whitespace'],
 	  \'html'       : ['html-beautify'],
-	  \'javascript' : ['eslint'],
-	  \'json'       : ['fixjson'],
+	  \'javascript' : ['dprint'],
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
@@ -154,6 +153,7 @@ if PlugLoaded('ale')
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
+	  \'json'       : ['dprint'],
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
@@ -162,14 +162,15 @@ if PlugLoaded('ale')
   \}
   let g:ale_fix_on_save_ignore = {
 	  \'html'       : ['html-beautify'],
-	  \'javascript' : ['eslint'],
-	  \'json'       : ['fixjson'],
+	  \'javascript' : ['dprint'],
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
+	  \'python'     : ['isort', 'ruff', 'autopep8'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
+	  \'json'       : ['dprint'],
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
@@ -182,8 +183,8 @@ if PlugLoaded('ale')
   let g:ale_javascript_prettier_use_local_config = 0
   let g:ale_sql_pgformatter_options = "--spaces 4 --comma-break --function-case 1 --keyword-case 1 --type-case 1"
   let g:ale_python_black_options = '--line-length 88 --skip-string-normalization'
-  let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
-  let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 119}"'
+  let g:ale_cpp_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 79}"'
+  let g:ale_c_clangformat_options = '--style="{IndentWidth: 4, ColumnLimit: 79}"'
   let g:ale_html_beautify_options = '--indent-size 2'
   let g:ale_dprint_use_global = 1
   let g:ale_python_isort_use_global = 1
