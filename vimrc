@@ -1,6 +1,3 @@
-" Set local foldmarker
-" vim:fdm=marker
-
 "**************************************************************
 " .vimrc
 
@@ -42,7 +39,7 @@ set fileencoding=utf-8                                                   | " Set
 set fileformats=unix,dos,mac                                             | " Use Unix as the standard file type
 set autoread                                                             | " Reload files changed outside vim
 set history=1000                                                         | " Store lots of :cmdline history
-set updatetime=100                                                       | " ??
+set updatetime=100                                                       | " Help vim-gitgutter update quicker
 set previewheight=15
 set noswapfile                                                           | " No swap file
 set nobackup                                                             | " No backup
@@ -52,7 +49,7 @@ set shortmess+=c                                                         | " Sup
 set laststatus=2                                                         | " Alawys show statusline
 set wildcharm=<tab>
 set wildmode=list:longest
-set wildignore=*.o,*~,*.pyc,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+set wildignore=*.o,*~,*.pyc,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite | " Wildignore
 set cmdheight=1                                                          | " Descrease bottom command window margin
 set hidden                                                               | " Allow buffers to exist in the background
 set whichwrap+=<,>,h,l
@@ -67,11 +64,12 @@ set belloff=all                                                          | " No 
 set t_vb=
 set ttimeout                                                             | " time out for key codes
 set ttimeoutlen=500                                                      | " Allows leader + multiple keystrokes
-set foldcolumn=0                                                         | " Remove left margin
 set title                                                                | " Put title on top of Vim
 set splitbelow                                                           | " Default to splitting below, not above
 set listchars+=space:␣                                                   | " Show trailing whitespace
+set foldcolumn=0                                                         | " Remove left margin
 set foldmethod=marker                                                    | " Placeholder
+set foldmarker={{{,}}}
 set nofoldenable                                                         | " Disable folding
 set display=truncate                                                     | " Show @@@ in the last line if it is truncated.
 set autoindent
@@ -84,6 +82,7 @@ set smartcase                                                            | " Swi
 set incsearch                                                            | " Do incremental searching when it's possible to timeout.
 set number                                                               | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
+set lazyredraw                                                           | " lazy redraw by default
 
 " Because I press this all the time
 command W w
@@ -331,6 +330,8 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 " zk moves the cursor to the previous fold.
 " zo opens a fold at the cursor.
 " zO opens all folds at the cursor.
+" zc close a fold at the cursor.
+" zC closes all folds at the cursor.
 " zm increases the foldlevel by one.
 " zr decreases the foldlevel by one.
 " zd deletes the fold at the cursor.
@@ -404,7 +405,7 @@ tmap <silent><leader>T :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $
 
 " Test
 nmap <silent><leader>zn :TestNearest<CR>
-nmap <silent><leader>zf :TestFile<CR>
+nmap <silent><leader>zp :TestFile<CR>
 nmap <silent><leader>zs :TestSuite<CR>
 nmap <silent><leader>zl :TestLast<CR>
 nmap <silent><leader>zv :TestVisit<CR>
