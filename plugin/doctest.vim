@@ -10,5 +10,5 @@ endfun
 
 augroup python_test
     autocmd!
-    autocmd Filetype python nnoremap <leader>zt :call TestFunction()<cr>
+    autocmd Filetype python nnoremap <leader>zt :call DoctestFunction()<cr>
 augroup end
