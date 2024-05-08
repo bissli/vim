@@ -1,1 +1,2 @@
-let test#strategy = 'vimterminal'
+let test#strategy = 'vimux'
+let g:VimuxHeight = '40'

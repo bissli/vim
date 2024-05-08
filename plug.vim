@@ -72,6 +72,7 @@ Plug 'preservim/vim-markdown'
 " Testing
 Plug 'vim-test/vim-test'
 Plug 'lambdalisue/doctest.vim'
+Plug 'preservim/vimux'
 " AI
 " Plug 'bissli/vim-chatgpt', {'for': ['python']}
 " Plug 'github/copilot.vim'
