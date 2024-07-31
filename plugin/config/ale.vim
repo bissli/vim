@@ -21,7 +21,7 @@ if PlugLoaded('ale')
 
   " => lint
   let g:ale_linters = {
-	  \'javascript': ['deno'],
+	  \'javascript': ['deno', 'eslint'],
 	  \'python': ['vim-lsp'],
 	  \'go': ['go', 'golint', 'errcheck'],
 	  \'cpp': ['clangtidy'],
@@ -145,7 +145,7 @@ if PlugLoaded('ale')
   let g:ale_fixers = {
 	  \'*'          : ['remove_trailing_lines', 'trim_whitespace'],
 	  \'html'       : ['html-beautify'],
-	  \'javascript' : ['dprint'],
+	  \'javascript' : ['dprint', 'eslint'],
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
@@ -153,7 +153,7 @@ if PlugLoaded('ale')
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
-	  \'json'       : ['dprint'],
+	  \'json'       : ['dprint', 'eslint'],
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
@@ -162,7 +162,7 @@ if PlugLoaded('ale')
   \}
   let g:ale_fix_on_save_ignore = {
 	  \'html'       : ['html-beautify'],
-	  \'javascript' : ['dprint'],
+	  \'javascript' : ['dprint', 'eslint'],
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
@@ -170,7 +170,7 @@ if PlugLoaded('ale')
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
-	  \'json'       : ['dprint'],
+	  \'json'       : ['dprint', 'eslint'],
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
