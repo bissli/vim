@@ -36,6 +36,7 @@ snippet tryp "Try / Except-PDB" b
 try:
   ${1:${VISUAL:pass}}
 except Exception as exc:
+  __import__('pprint').pprint(__import__('traceback').format_exc())
   __import__('pdb').set_trace()
   raise
 $0
@@ -61,6 +62,20 @@ import os
 with open(os.path.join(os.path.expanduser('~'), '${2:Downloads}', '${3:$1}.${4:txt}'), 'w+') as f:
 	f.write(${1:thename})
 $0
+endsnippet
+
+snippet ifmain "ifmain" b
+
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+    main() \
+endsnippet
+
+snippet ifmain "ifmain-test" b
+
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+    main() \
+    if len(__import__(`!p snip.rv = get_quoting_style(snip)`sys`!p snip.rv = get_quoting_style(snip)`).argv) > 1 \
+    else __import__(`!p snip.rv = get_quoting_style(snip)`doctest`!p snip.rv = get_quoting_style(snip)`).testmod(optionflags=4 | 8 | 32)
 endsnippet
 
 # "NORMALIZE_WHITESPACE | ELLIPSIS | IGNORE_EXCEPTION_DETAIL"
