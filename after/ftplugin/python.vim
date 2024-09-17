@@ -41,32 +41,48 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => context-aware textwidth (from vim-pep8-text-width)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:py_code_text_width=79
-let g:py_comment_text_width=72
-let g:py_string_text_width=119
+let g:python_normal_text_width=79
+let g:python_comment_text_width=72
+let g:python_string_text_width=119
+
+function! GetPythonTextWidth()
+    if !exists('g:python_normal_text_width')
+        let normal_text_width = 79
+    else
+        let normal_text_width = g:python_normal_text_width
+    endif
+
+    if !exists('g:python_comment_text_width')
+        let comment_text_width = 72
+    else
+        let comment_text_width = g:python_comment_text_width
+    endif
+
+    if !exists('g:python_string_text_width')
+        let string_text_width = 72
+    else
+        let string_text_width = g:python_string_text_width
+    endif
+
+    let cur_syntax = synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name")
+
+    if cur_syntax == "Comment"
+        return comment_text_width
+    endif
+
+    if cur_syntax == "String"
+        " Check to see if we're in a docstring
+        if match(getline(line(".")), "^\\s*\\('''\\|\"\"\"\\)") == 0
+            return normal_text_width
+        else
+            return string_text_width
+        endif
+    endif
+
+    return normal_text_width
+endfunction
 
 augroup pep8textwidth
-  autocmd! CursorMoved,CursorMovedI <buffer> :exe 'setlocal textwidth='.s:GetCurrentTextWidth()
+    au!
+    autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 augroup END
-
-" Return appropriate textwidth for cursor position (leverages syntax engine).
-function! s:GetCurrentTextWidth()
-    " - comments should be 70 characters, simple enough as entire line is a
-    " comment
-    " - string issue at 70 characters is that it wraps down to the next line
-    let r = line(".")
-    let c = col(".")
-    let curr_syntax = synIDattr(synIDtrans(synID(r, c, 0)), "name")
-    let prev_syntax = synIDattr(synIDtrans(synID(r, c-1, 0)), "name")
-    " let next_syntax = synIDattr(synIDtrans(synID(r, c+1, 0)), "name")
-    " let above_syntax = synIDattr(synIDtrans(synID(r-1, c, 0)), "name")
-    " let below_syntax = synIDattr(synIDtrans(synID(r+1, c, 0)), "name")
-    " echom "[" . above_syntax . "],[" . prev_syntax . "],[" . curr_syntax . "],[". next_syntax . "],[" . below_syntax . "]"
-    if curr_syntax =~ 'Comment\|Todo' || prev_syntax =~ 'Comment\|Todo'
-        return g:py_comment_text_width
-    elseif curr_syntax =~ 'String' || prev_syntax =~ 'String'
-        return g:py_string_text_width
-    else
-      return g:py_code_text_width
-    endif
-endfunction
