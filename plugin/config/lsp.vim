@@ -94,14 +94,14 @@ if PlugLoaded('vim-lsp')
       autocmd User lsp_buffer_enabled call s:OnLspBufferEnabled()
   augroup END
 
-  func! CopilotVisible()
-    let copilot_result = g:copilot#GetDisplayedSuggestion()
-    return has_key(copilot_result, 'text') && copilot_result['text'] != ''
-  endfunc
+  " func! CopilotVisible()
+    " let copilot_result = g:copilot#GetDisplayedSuggestion()
+    " return has_key(copilot_result, 'text') && copilot_result['text'] != ''
+  " endfunc
 
   " move up and down in autocomplete with <c-j> and <c-k>
-  inoremap <expr> <C-j> CopilotVisible() ? "\<Plug>(copilot-next)": ("\<C-n>")
-  inoremap <expr> <C-k> CopilotVisible() ? "\<Plug>(copilot-previous)": ("\<C-p>")
+  " inoremap <expr> <C-j> CopilotVisible() ? "\<Plug>(copilot-next)": ("\<C-n>")
+  " inoremap <expr> <C-k> CopilotVisible() ? "\<Plug>(copilot-previous)": ("\<C-p>")
   " close popup
   inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : "\<CR>"
   inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"

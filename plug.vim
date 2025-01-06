@@ -7,6 +7,7 @@ call plug#begin(expand($HOME.'/.vim/plugged'))
 
 " general
 Plug 'bissli/inkpot'
+Plug 'rhysd/vim-healthcheck'
 if g:os == 'Linux'
   Plug 'vim-scripts/colorsupport.vim'
 endif
@@ -73,12 +74,8 @@ Plug 'preservim/vim-markdown'
 Plug 'vim-test/vim-test'
 Plug 'lambdalisue/doctest.vim'
 Plug 'preservim/vimux'
-" AI
-" Plug 'bissli/vim-chatgpt', {'for': ['python']}
-" Plug 'github/copilot.vim'
-Plug 'rhysd/vim-healthcheck'
 " Slime
-Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown'] }
+Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown', 'aider'] }
 Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
 
 call plug#end()
