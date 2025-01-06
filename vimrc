@@ -308,6 +308,7 @@ au BufRead /tmp/psql.edit.* set filetype=sql
 au BufRead /tmp/ssql.edit.* set filetype=sql
 au BufRead,BufNewFile Result set filetype=sql
 au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
+au BufRead,BufFilePre,BufNewFile INSTRUCT set filetype=aider
 au BufRead,BufNewFile *.ipynb set filetype=ipynb
 au BufRead,BufNewFile *ideavimrc set filetype=vim
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
