@@ -15,7 +15,13 @@ endfunction
 
 " https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 function! Grep(...)
-  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+  " If multiple arguments are provided, treat them as a single search pattern
+  if a:0 > 1
+    let search_term = join(a:000, ' ')
+    return system(join([&grepprg, shellescape(search_term)], ' '))
+  else
+    return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+  endif
 endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
@@ -32,12 +38,12 @@ cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'L
 
 func! GrepDoc()
   " Search word under cursor
-  silent! execute "Grep ".expand('<cword>')." ".expand('%') | :cw
+  silent! execute "Grep ".shellescape(expand('<cword>'))." ".expand('%') | :cw
 endfunc
 
 func! GrepWs()
   " Search word under cursor
-  silent! execute "Grep ".expand('<cword>'). " " .FindRootDirectory()
+  silent! execute "Grep ".shellescape(expand('<cword>')). " " .FindRootDirectory()
 endfunc
 
 func! ShortenPathsInList(list)
