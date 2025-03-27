@@ -24,4 +24,3 @@ au Filetype sql,buffer noremap <silent> <leader>sp <esc> :call NextDbextProfile(
 " au VimEnter * DBCompleteTables
 " vmap <silent><Leader>r :!psql -e<cr><cr>
 " https://www.postgresql.org/docs/current/libpq-envars.html
-

@@ -127,6 +127,12 @@ if PlugLoaded('ale')
       \}
   endfunction
 
+  function! PythonCommentCaseFormatter(buffer) abort
+    return {
+    \   'command': "sed '/^[^\"'']*#[[:space:]]*/s/#[[:space:]]*\\([^A-Z]\\)\\([A-Z]\\)/# \\l\\1\\2/'",
+    \}
+  endfunction
+
   let g:ale_sql_sqlformat_options = join(['',
 	  \'--reindent',
 	  \'--indent_width 4',
@@ -140,20 +146,21 @@ if PlugLoaded('ale')
   endfunction
 
   execute ale#fix#registry#Add('docformatter', 'PythonDocFormatter', ['python'], 'docformatter for python')
+  execute ale#fix#registry#Add('comment_case', 'PythonCommentCaseFormatter', ['python'], 'uppercase python comments')
   execute ale#fix#registry#Add('sqlformat', 'SqlFormatFormatter', ['sql'], 'sqlformat formatter for sql')
 
   let g:ale_fixers = {
 	  \'*'          : ['remove_trailing_lines', 'trim_whitespace'],
 	  \'html'       : ['html-beautify'],
-	  \'javascript' : ['dprint', 'eslint'],
+	  \'javascript' : ['eslint'],
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['isort', 'ruff', 'autopep8'],
+	  \'python'     : ['isort',  'comment_case', 'ruff', 'autopep8'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
-	  \'json'       : ['dprint', 'eslint'],
+	  \'json'       : ['eslint'],
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
@@ -162,15 +169,15 @@ if PlugLoaded('ale')
   \}
   let g:ale_fix_on_save_ignore = {
 	  \'html'       : ['html-beautify'],
-	  \'javascript' : ['dprint', 'eslint'],
+	  \'javascript' : ['eslint'],
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['isort', 'ruff', 'autopep8'],
+	  \'python'     : ['isort', 'ruff', 'autopep8', 'comment_case'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
-	  \'json'       : ['dprint', 'eslint'],
+	  \'json'       : ['eslint'],
 	  \'md'         : ['dprint'],
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],

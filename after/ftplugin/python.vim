@@ -10,7 +10,7 @@ setl linebreak
 setl smarttab
 setl nolisp
 setl nowrap
-setl colorcolumn=79
+setl colorcolumn=88
 
 " For python, exclude 'longest' from completeopt in order
 " to prevent underscore prefix auto-completion (e.g. self.__)
@@ -41,45 +41,28 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => context-aware textwidth (from vim-pep8-text-width)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_normal_text_width=79
+let g:python_normal_text_width=88
 let g:python_comment_text_width=72
+let g:python_docstring_text_width=79
 let g:python_string_text_width=119
 
 function! GetPythonTextWidth()
-    if !exists('g:python_normal_text_width')
-        let normal_text_width = 79
-    else
-        let normal_text_width = g:python_normal_text_width
-    endif
-
-    if !exists('g:python_comment_text_width')
-        let comment_text_width = 72
-    else
-        let comment_text_width = g:python_comment_text_width
-    endif
-
-    if !exists('g:python_string_text_width')
-        let string_text_width = 72
-    else
-        let string_text_width = g:python_string_text_width
-    endif
-
     let cur_syntax = synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name")
 
     if cur_syntax == "Comment"
-        return comment_text_width
+        return g:python_comment_text_width
     endif
 
     if cur_syntax == "String"
         " Check to see if we're in a docstring
         if match(getline(line(".")), "^\\s*\\('''\\|\"\"\"\\)") == 0
-            return normal_text_width
+            return g:python_docstring_text_width
         else
-            return string_text_width
+            return g:python_string_text_width
         endif
     endif
 
-    return normal_text_width
+    return g:python_normal_text_width
 endfunction
 
 augroup pep8textwidth

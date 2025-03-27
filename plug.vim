@@ -23,7 +23,6 @@ Plug 'stefandtw/quickfix-reflector.vim'
 " mappings
 Plug 'tpope/vim-unimpaired'
 " text
-Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular'
 Plug 'preservim/nerdcommenter'
 " tmux
@@ -47,7 +46,6 @@ Plug 'rhysd/vim-lsp-ale'
 Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
 " git
 Plug 'tpope/vim-fugitive', !has('win32') ? {} : { 'on': [] }
-Plug 'iberianpig/tig-explorer.vim', !has('win32') ? {} : { 'on': [] }
 Plug 'rhysd/conflict-marker.vim'
 Plug 'airblade/vim-gitgutter'
 " db
@@ -56,27 +54,24 @@ Plug 'collinpeters/dbext.vim', { 'for': ['sql', 'buffer'] }
 Plug 'tpope/vim-endwise'
 Plug 'cohama/lexima.vim'
 Plug 'alvan/vim-closetag', { 'for': ['html'] }
-Plug 'valloric/MatchTagAlways', { 'for': ['html'] }
+Plug 'bissli/MatchTagAlways', { 'for': ['html'] }
 " language tools / syntax
-Plug 'dbmrq/vim-chalk'
+Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-SyntaxRange'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'masukomi/vim-markdown-folding', { 'for': ['markdown'] }
 Plug 'jalvesaq/R-Vim-runtime', { 'for': ['r'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': ['python'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javscript'] }
-Plug 'inkarkat/vim-ExtractMatches'
-Plug 'inkarkat/vim-ingo-library'
 Plug 'pixelneo/vim-python-docstring', { 'for': ['python'] }
 " markdown
 Plug 'preservim/vim-markdown'
 " Testing
 Plug 'vim-test/vim-test'
-Plug 'lambdalisue/doctest.vim'
 Plug 'preservim/vimux'
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown', 'aider'] }
 Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
+" Temp...
+Plug 'takac/vim-hardtime'
 
 call plug#end()
 

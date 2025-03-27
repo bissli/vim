@@ -1,23 +1,15 @@
 "**************************************************************
 " .vimrc
-
+"**************************************************************
+" OVERVIEW:
 " A buffer is the in-memory text of a file
 " A window is a viewport on a buffer
 " A tab page is a collection of windows
 "
-" https://stackoverflow.com/a/26710166
-"
-" Abbreviations: https://stackoverflow.com/a/9312070
+" REFERENCES:
+" - https://stackoverflow.com/a/26710166
+" - Abbreviations: https://stackoverflow.com/a/9312070
 "**************************************************************
-
-" ---------------------------------------------------------------
-" Configure Directories
-" ---------------------------------------------------------------
-if has('win32') || has('win64')
-  set runtimepath+=$HOME/.vim,$HOME/_vim,$HOME/vimfiles,$VIMRUNTIME
-else
-  set runtimepath+=$HOME/.vim
-endif
 
 " ---------------------------------------------------------------
 " OS Detection
@@ -39,7 +31,7 @@ set fileencoding=utf-8                                                   | " Set
 set fileformats=unix,dos,mac                                             | " Use Unix as the standard file type
 set autoread                                                             | " Reload files changed outside vim
 set history=1000                                                         | " Store lots of :cmdline history
-set updatetime=100                                                       | " Help vim-gitgutter update quicker
+set updatetime=250                                                       | " Help vim-gitgutter update quicker
 set previewheight=15
 set noswapfile                                                           | " No swap file
 set nobackup                                                             | " No backup
@@ -63,13 +55,11 @@ set novisualbell                                                         | " No 
 set belloff=all                                                          | " No sounds
 set t_vb=
 set ttimeout                                                             | " time out for key codes
+set timeoutlen=300                                                       | " Set a shorter timeout to reduce delay when typing j/k in insert mode
 set ttimeoutlen=500                                                      | " Allows leader + multiple keystrokes
 set title                                                                | " Put title on top of Vim
 set splitbelow                                                           | " Default to splitting below, not above
 set listchars+=space:␣                                                   | " Show trailing whitespace
-set foldcolumn=0                                                         | " Remove left margin
-set foldmethod=marker                                                    | " Placeholder
-set foldmarker={{{,}}}
 set nofoldenable                                                         | " Disable folding
 set display=truncate                                                     | " Show @@@ in the last line if it is truncated.
 set autoindent
@@ -83,14 +73,6 @@ set incsearch                                                            | " Do 
 set number                                                               | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 set lazyredraw                                                           | " lazy redraw by default
-
-" Because I press this all the time
-command W w
-
-" :S sudo saves the file
-" (useful for handling the permission-denied error)
-" command! S execute 'w !sudo tee % > /dev/null' <bar> edit!
-command S w !sudo tee % > /dev/null
 
 " ---------------------------------------------------------------
 " Leader
@@ -139,16 +121,6 @@ set background=dark
 " ---------------------------------------------------------------
 " Fonts, Syntax
 " ---------------------------------------------------------------
-" Set extra options when running in GUI mode
-if has("gui_running")
-  set guioptions-=T
-  set guioptions-=t
-  set guioptions-=e
-  set guioptions-=r
-  " set guitablabel=%M\ %t
-  set guifont=FiraCodeNF-Reg:h13
-endif
-
 " cursor options (blink insert, not on normal)
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
@@ -162,14 +134,12 @@ endif
 set diffopt+=vertical,internal,algorithm:patience
 if &diff | set noreadonly | endif
 
-" au BufWritePost * if &diff | diffupdate | endif
-
 " highlight non-ascii characters
 augroup HighlightUnicode
-autocmd!
-autocmd ColorScheme *
-	\ syntax match nonascii "[^\x00-\x7F]" |
-	\ highlight nonascii guibg=red ctermbg=2
+  autocmd!
+  autocmd ColorScheme *
+    \ syntax match nonascii "[^\x00-\x7F]" |
+    \ highlight nonascii guibg=red ctermbg=2
 augroup end
 silent doautocmd HighlightUnicode ColorScheme
 
@@ -178,13 +148,10 @@ silent doautocmd HighlightUnicode ColorScheme
 " ---------------------------------------------------------------
 " Persistent Undo
 " ---------------------------------------------------------------
-try
-    let myundodir = expand($HOME . '/.undodir')
-    call mkdir(myundodir, 'p')
-    let &undodir = myundodir
-    set undofile
-catch
-endtry
+let myundodir = expand($HOME . '/.undodir')
+call mkdir(myundodir, 'p')
+let &undodir = myundodir
+set undofile
 
 " ---------------------------------------------------------------
 " Moving around
@@ -194,50 +161,31 @@ endtry
 vnoremap <silent> * :<C-u>call <SID>VSetSearch()<cr>//<cr><C-o>
 vnoremap <silent> # :<C-u>call <SID>VSetSearch()<cr>??<cr><C-o>
 
-" Disable highlight when <leader><cr> is pressed
-map <silent><leader><cr> :noh<cr>
-" redraw the screen and remove any highlighting
-nnoremap <silent><C-l> :nohl<cr><C-l>
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
 " Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
+set switchbuf=useopen,usetab,newtab
+set showtabline=2
 
 " Return to last edit position when opening files
-au BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\""                           |
-     \ endif
+augroup LastPosition
+  autocmd!
+  autocmd BufReadPost *
+       \ if line("'\"") > 0 && line("'\"") <= line("$") |
+       \   exe "normal! g`\""                           |
+       \ endif
+augroup END
 
 " Remember info about open buffers on close
 set viminfo^=%
 
-" In many terminal emulators the mouse works just fine.  By enabling it you
-" can position the cursor, Visually select and scroll with the mouse.
-" Only xterm can grab the mouse events when using the shift key, for other
-" terminals use ":", select text and press Esc.
-if has('mouse')
-  if &term =~ '\v(xterm|tmux)'
-    set mouse=a
-  else
-    set mouse=nvi
-  endif
-endif
-
 " ---------------------------------------------------------------
 " Clipboard
 " ---------------------------------------------------------------
-aug Yank
-	au!
-	noremap <silent> y y:call WriteToVmuxClipboard()<cr>
-	noremap <silent> x x:call WriteToVmuxClipboard()<cr>
-	au FocusGained,BufEnter * silent! call ReadFromVmuxClipboard()
-aug END
+augroup Yank
+  autocmd!
+  noremap <silent> y y:call WriteToVmuxClipboard()<cr>
+  noremap <silent> x x:call WriteToVmuxClipboard()<cr>
+  autocmd FocusGained,BufEnter * silent! call ReadFromVmuxClipboard()
+augroup END
 
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <silent><cr> :nohlsearch<cr><cr>
@@ -245,19 +193,9 @@ nnoremap <silent><cr> :nohlsearch<cr><cr>
 " ---------------------------------------------------------------
 " Editing mappings
 " ---------------------------------------------------------------
-" Remap Vim 0 to first non-blank character
-map 0 ^
-
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
-
-" Escape with jk or jk in insert mode
-inoremap jk <esc>
-inoremap kj <esc>
-
-" q means quit
-nnoremap q :q<cr>
 
 " [t]e -> [tab]edit
 cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'edit' : 'e'
@@ -272,75 +210,34 @@ nnoremap <silent><leader>SS :setlocal nospell<cr>               | " Disable spel
 nnoremap <silent><leader>Sf z=                                  | " Fix word
 
 " ---------------------------------------------------------------
-" Misc
-" ---------------------------------------------------------------
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-" convert Excel 4/2/20 to SQL '2020-4-2'
-" s/\(\d*\)\/\(\d*\)\/\(\d*\)/'20\3-\1-\2'/g"
-
-" Sudo save
-cmap W! w !sudo tee % >/dev/null
-
-" Don't use Q for Ex mode, use it for formatting. Except for Select mode.
-map Q gq
-sunmap Q
-
-" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" ---------------------------------------------------------------
 " Filetype Specific
 " ---------------------------------------------------------------
-au BufRead,BufNewFile *.vb set filetype=vb
-au BufRead,BufNewFile *.{bashrc,profile,sh,bash_profile} set filetype=bash
-au BufRead,BufNewFile *.{js,mjs,cjs,jsm,es,es6},Jakefile set filetype=javascript
-au BufRead,BufNewFile *.jinja set syntax=htmljinja
-au BufRead,BufNewFile *.mako set filetype=mako
-au BufRead,BufFilePre,BufNewFile README set filetype=markdown
-au BufRead,BufNewFile *.scm set filetype=scheme
-au BufRead /tmp/psql.edit.* set filetype=sql
-au BufRead /tmp/ssql.edit.* set filetype=sql
-au BufRead,BufNewFile Result set filetype=sql
-au BufRead,BufFilePre,BufNewFile buffer set filetype=sql
-au BufRead,BufFilePre,BufNewFile INSTRUCT set filetype=aider
-au BufRead,BufNewFile *.ipynb set filetype=ipynb
-au BufRead,BufNewFile *ideavimrc set filetype=vim
-au FileType gitcommit call setpos('.', [0, 1, 1, 0])
-au FocusGained * :redraw!
+augroup FileTypeDetection
+  autocmd!
+  autocmd BufRead,BufNewFile *.vb set filetype=vb
+  autocmd BufRead,BufNewFile *.{bashrc,profile,sh,bash_profile} set filetype=bash
+  autocmd BufRead,BufNewFile *.{js,mjs,cjs,jsm,es,es6},Jakefile set filetype=javascript
+  autocmd BufRead,BufNewFile *.jinja set syntax=htmljinja
+  autocmd BufRead,BufNewFile *.mako set filetype=mako
+  autocmd BufRead,BufFilePre,BufNewFile README set filetype=markdown
+  autocmd BufRead,BufNewFile *.scm set filetype=scheme
+  autocmd BufRead /tmp/psql.edit.* set filetype=sql
+  autocmd BufRead /tmp/ssql.edit.* set filetype=sql
+  autocmd BufRead,BufNewFile Result set filetype=sql
+  autocmd BufRead,BufFilePre,BufNewFile buffer set filetype=sql
+  autocmd BufRead,BufFilePre,BufNewFile INSTRUCT set filetype=aider
+  autocmd BufRead,BufNewFile *.ipynb set filetype=ipynb
+  autocmd BufRead,BufNewFile *ideavimrc set filetype=vim
+  autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+  autocmd FocusGained * :redraw!
+augroup END
 
-" Triger `autoread` when files changes on disk
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
-  \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
-
-" Folding
-
-" Cheatsheet
-
-" zR: open all folds
-" zM: close all folds
-"
-" czf#j creates a fold from the cursor down # lines.
-" zf/string creates a fold from the cursor to string .
-" zj moves the cursor to the next fold.
-" zk moves the cursor to the previous fold.
-" zo opens a fold at the cursor.
-" zO opens all folds at the cursor.
-" zc close a fold at the cursor.
-" zC closes all folds at the cursor.
-" zm increases the foldlevel by one.
-" zr decreases the foldlevel by one.
-" zd deletes the fold at the cursor.
-" zE deletes all folds.
-" [z move to start of open fold.
-" ]z move to end of open fold.
-
-" Next
+" Trigger `autoread` when files changes on disk
+augroup AutoReloadFile
+  autocmd!
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+augroup END
 
 "
 " Mappings
@@ -368,7 +265,10 @@ nnoremap <silent><leader>bc :BufClose<cr>
 nnoremap <silent><leader>bh :BufHiddenClose<cr>
 nmap <silent><unique>]b <Plug>CycleToNextBuffer
 nmap <silent><unique>[b <Plug>CycleToPreviousBuffer
-au BufRead,BufNewFile * BufNoNameClose
+augroup BufferManagement
+  autocmd!
+  autocmd BufRead,BufNewFile * BufNoNameClose
+augroup END
 
 " Navigation
 nnoremap <silent><C-p> :exe "FZF ".FindRootDirectory()<cr>
@@ -390,27 +290,11 @@ nnoremap <silent> <leader>tm :tabmove
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<cr>
-au TabLeave * let g:lasttab = tabpagenr()
-au BufFilePost * CloseDupTabs
-
-" Terminal
-" <C-w><C-w> to toggle splits
-" <C-w>| or <c-w>_ to maximize
-" <C-w>= for even spacing
-" <C-w>: for normal mode
-" <C-w>"" for pasting the " register
-" <C-w>N to switch to normal mode
-" <C-w> :dis[play] to see all available registers and their content
-map <silent><leader>T :let $_=expand('%:p:h')<cr>:terminal ++close<cr>cd $_<cr>clear<cr>
-tmap <silent><leader>T :let $_=expand('%:p:h')<cr><c-w>:terminal ++close<cr>cd $_<cr>clear<cr>
-
-" Test
-nmap <silent><leader>zn :TestNearest<CR>
-nmap <silent><leader>zp :TestFile<CR>
-nmap <silent><leader>zs :TestSuite<CR>
-nmap <silent><leader>zl :TestLast<CR>
-nmap <silent><leader>zv :TestVisit<CR>
-" <leader>zt -> run doctest for function under cursor
+augroup TabManagement
+  autocmd!
+  autocmd TabLeave * let g:lasttab = tabpagenr()
+  autocmd BufFilePost * CloseDupTabs
+augroup END
 
 " Git
 nnoremap <Leader>gb :Git blame<cr>
@@ -463,9 +347,3 @@ nnoremap <leader>jj :%s/<c-r>=expand("<cword>")<cr>/
 nnoremap <leader>co :botright copen<cr>
 nnoremap <leader>cx :cclose<cr>
 nmap <silent>\ <Plug>(qf_qf_toggle)
-
-" Align
-" " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
