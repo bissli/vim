@@ -129,7 +129,7 @@ if PlugLoaded('ale')
 
   function! PythonCommentCaseFormatter(buffer) abort
     return {
-    \   'command': "sed '/^[^\"'']*#[[:space:]]*/s/#[[:space:]]*\\([^A-Z]\\)\\([A-Z]\\)/# \\l\\1\\2/'",
+    \   'command': "sed '/^[^\"'']*#[[:space:]]*/s/#[[:space:]]*\\([a-z]\\)/# \\u\\1/'",
     \}
   endfunction
 
