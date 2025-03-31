@@ -21,6 +21,3 @@ func! NextDbextProfile()
     let s:current_profile_number = s:current_profile_number + 1
 endfunc
 au Filetype sql,buffer noremap <silent> <leader>sp <esc> :call NextDbextProfile()<cr>
-" au VimEnter * DBCompleteTables
-" vmap <silent><Leader>r :!psql -e<cr><cr>
-" https://www.postgresql.org/docs/current/libpq-envars.html

@@ -5,7 +5,7 @@ if PlugLoaded('vim-lsp')
   endif
 
   " vim-lsp options
-  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_enabled = 0
   let g:lsp_document_highlight_enabled = 0
   let g:lsp_format_sync_timeout = 1000
   let g:lsp_document_code_action_signs_enabled = 0
@@ -134,7 +134,7 @@ if PlugLoaded('vim-lsp')
   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
       \ 'name': 'omni',
       \ 'allowlist': ['*'],
-      \ 'blocklist': ['c', 'cpp', 'html'],
+      \ 'blocklist': ['c', 'cpp', 'html', 'sql'],
       \ 'priority': 20,
       \ 'completor': function('asyncomplete#sources#omni#completor'),
       \ 'config': {
@@ -151,61 +151,23 @@ if PlugLoaded('vim-lsp')
   let directories=glob(fnameescape(g:lsp_settings_servers_dir).'/{,.}*/', 1, 1)
   call map(directories, 'fnamemodify(v:val, ":h:t")')
 
-  let g:lsp_settings_filetype_python = [
-      \ 'jedi-language-server',
-      \ 'pylsp',
-      \ 'ruff-lsp'
-      \]
+  let g:lsp_settings_filetype_python = []
+  let g:lsp_settings_filetype_sql = []
+
+  let g:jedi_language_server_path = g:lsp_settings_servers_dir . 'jedi-language-server/jedi-language-server'
+  let g:ruff_language_server_path = g:lsp_settings_servers_dir . 'ruff/ruff'
+  let g:sqls_language_server_path = g:lsp_settings_servers_dir . 'sqls/sqls'
+
+  if executable(g:ruff_language_server_path)
+      call add(g:lsp_settings_filetype_python, 'ruff')
+  endif
 
   if index(directories, 'jedi-language-server') != -1
-    call remove(g:lsp_settings_filetype_python, 'jedi-language-server')
     call add(g:lsp_settings_filetype_python, 'jedi-language-server~')
   endif
 
-  if index(directories, 'pylsp') != -1
-    call remove(g:lsp_settings_filetype_python, 'pylsp')
-    call add(g:lsp_settings_filetype_python, 'pylsp~')
-  endif
-
-  if index(directories, 'ruff-lsp') != -1
-    call remove(g:lsp_settings_filetype_python, 'ruff-lsp')
-    call remove(g:lsp_settings_filetype_python, 'ruff-lsp')
-    call add(g:lsp_settings_filetype_python, 'ruff-lsp~')
-  endif
-
-  let g:jedi_language_server_path = g:lsp_settings_servers_dir . 'jedi-language-server/jedi-language-server'
-  let g:pylsp_language_server_path = g:lsp_settings_servers_dir . 'pylsp/pylsp'
-  let g:ruff_language_server_path = g:lsp_settings_servers_dir . 'ruff-lsp/ruff-lsp'
-
-  if executable(g:pylsp_language_server_path)
-      au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp~',
-        \ 'cmd': {server_info->[g:pylsp_language_server_path]},
-        \ 'allowlist': ['python'],
-        \ 'workspace_config':
-        \ {'pylsp':
-        \	{'plugins': {
-        \		'jedi_completion': {'enabled': v:true},
-        \		'jedi_hover': {'enabled': v:true},
-        \		'jedi_references': {'enabled': v:true},
-        \		'jedi_signature_help': {'enabled': v:true},
-        \		'jedi_symbols': {'enabled': v:true},
-        \		'jedi_definintion': {'enabled': v:true},
-        \		'rope_completion': {'enabled': v:true},
-        \		'pycodestyle': {'enabled': v:false},
-        \		'flake8': {'enabled': v:false},
-        \		'mypy': {'enabled': v:false},
-        \		'isort': {'enabled': v:false},
-        \		'yapf': {'enabled': v:false},
-        \		'pylint': {'enabled': v:false},
-        \		'pydocstyle': {'enabled': v:false},
-        \		'mccabe': {'enabled': v:false},
-        \		'preload': {'enabled': v:false},
-        \	},
-        \}},
-        \ })
-  endif
   if executable(g:jedi_language_server_path)
+      call add(g:lsp_settings_filetype_python, 'jedi-language-server~')
       au User lsp_setup call lsp#register_server({
         \ 'name': 'jedi-language-server~',
         \ 'cmd': {server_info->[g:jedi_language_server_path]},
@@ -220,12 +182,17 @@ if PlugLoaded('vim-lsp')
         \ },
         \ })
   endif
-  if executable(g:ruff_language_server_path)
-      au User lsp_setup call lsp#register_server({
-        \ 'name': 'ruff-lsp~',
-        \ 'cmd': {server_info->[g:ruff_language_server_path]},
-        \ 'allowlist': ['python']
-        \ })
+
+  if executable(g:sqls_language_server_path)
+    call add(g:lsp_settings_filetype_sql, 'sqls~')
+    augroup LspSqls
+	autocmd!
+	autocmd User lsp_setup call lsp#register_server({
+	\   'name': 'sqls~',
+	\   'cmd': {server_info->[g:sqls_language_server_path, '-c', expand($HOME.'/.secret/sqls/config.yml')]},
+	\   'allowlist': ['sql'],
+	\ })
+    augroup END
   endif
 
   func! PreviewHeightWorkAround()
