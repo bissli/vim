@@ -227,7 +227,6 @@ augroup FileTypeDetection
   autocmd BufRead,BufFilePre,BufNewFile buffer set filetype=sql
   autocmd BufRead,BufFilePre,BufNewFile INSTRUCT set filetype=aider
   autocmd BufRead,BufNewFile *.ipynb set filetype=ipynb
-  autocmd BufRead,BufNewFile *ideavimrc set filetype=vim
   autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
   autocmd FocusGained * :redraw!
 augroup END
