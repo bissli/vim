@@ -21,7 +21,7 @@ if PlugLoaded('ale')
 
   " => lint
   let g:ale_linters = {
-	  \'javascript': ['deno', 'eslint'],
+	  \'javascript': ['eslint'],
 	  \'python': ['vim-lsp'],
 	  \'go': ['go', 'golint', 'errcheck'],
 	  \'cpp': ['clangtidy'],
@@ -29,6 +29,7 @@ if PlugLoaded('ale')
 	  \'c': ['clangtidy'],
 	  \'tex': ['chktex'],
 	  \'matlab': ['mlint'],
+	  \'vim'   : ['vimls']
   \}
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 1
@@ -127,12 +128,6 @@ if PlugLoaded('ale')
       \}
   endfunction
 
-  function! PythonCommentCaseFormatter(buffer) abort
-    return {
-    \   'command': "sed '/^[^\"'']*#[[:space:]]*/s/#[[:space:]]*\\([a-z]\\)/# \\u\\1/'",
-    \}
-  endfunction
-
   let g:ale_sql_sqlformat_options = join(['',
 	  \'--reindent',
 	  \'--indent_width 4',
@@ -146,7 +141,6 @@ if PlugLoaded('ale')
   endfunction
 
   execute ale#fix#registry#Add('docformatter', 'PythonDocFormatter', ['python'], 'docformatter for python')
-  execute ale#fix#registry#Add('comment_case', 'PythonCommentCaseFormatter', ['python'], 'uppercase python comments')
   execute ale#fix#registry#Add('sqlformat', 'SqlFormatFormatter', ['sql'], 'sqlformat formatter for sql')
 
   let g:ale_fixers = {
@@ -156,7 +150,8 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
-	  \'python'     : ['isort',  'comment_case', 'ruff', 'autopep8'],
+	  \'cs'         : ['dotnet-format'],
+	  \'python'     : ['isort', 'ruff', 'autopep8'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
 	  \'toml'       : ['dprint'],
@@ -165,7 +160,7 @@ if PlugLoaded('ale')
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
 	  \'sql'        : ['sqlformat'],
-	  \'r'          : ['styler']
+	  \'r'          : ['styler'],
   \}
   let g:ale_fix_on_save_ignore = {
 	  \'html'       : ['html-beautify'],
@@ -173,6 +168,7 @@ if PlugLoaded('ale')
 	  \'css'        : ['stylelint', 'prettier'],
 	  \'c'          : ['clang-format'],
 	  \'cpp'        : ['clang-format'],
+	  \'cs'         : ['dotnet-format'],
 	  \'python'     : ['isort', 'ruff', 'autopep8', 'comment_case'],
 	  \'go'         : ['golint'],
 	  \'xml'        : ['xmllint'],
@@ -182,7 +178,7 @@ if PlugLoaded('ale')
 	  \'xsd'        : ['xmllint'],
 	  \'matlab'     : ['mlint'],
 	  \'sql'        : ['sqlformat'],
-	  \'r'          : ['styler']
+	  \'r'          : ['styler'],
   \}
   let g:ale_fixers_explicit = 1
   let g:ale_fix_on_enter = 0
