@@ -8,8 +8,9 @@ let g:dbext_default_buffer_lines = 25
 let g:dbext_default_job_enable = 0
 let s:dbext_profiles = ['psql', 'ssql']
 let s:current_profile_number = 0
-au Filetype sql,buffer xmap <buffer> <leader>se <Plug>DBExecVisualSQL
-au Filetype sql,buffer nmap <buffer> <leader>se <Plug>DBExecVisualSQL
+au Filetype sql xmap <buffer> <leader>se <Plug>DBExecVisualSQL
+au Filetype sql nmap <buffer> <leader>se <Plug>DBExecVisualSQL
+au Filetype sql nmap <buffer> <leader>dt <Plug>DBDescribeTable
 func! NextDbextProfile()
     " Reset current_profile_number if too high
     if s:current_profile_number >= len(s:dbext_profiles)

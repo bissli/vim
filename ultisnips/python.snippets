@@ -99,8 +99,8 @@ endsnippet
 snippet iftest "logger-cmd" b
 
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
-    import libb, logging, doctest, sys  # noqa
-    libb.configure_logging(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
+    import logging, log, doctest, sys  # noqa
+    log.configure_logging(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
     logger = logging.getLogger(`!p snip.rv = get_quoting_style(snip)`cmd`!p snip.rv = get_quoting_style(snip)`)
     doctest.testmod(optionflags=4 | 8 | 32)
 endsnippet

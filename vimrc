@@ -31,7 +31,7 @@ set fileencoding=utf-8                                                   | " Set
 set fileformats=unix,dos,mac                                             | " Use Unix as the standard file type
 set autoread                                                             | " Reload files changed outside vim
 set history=1000                                                         | " Store lots of :cmdline history
-set updatetime=250                                                       | " Help vim-gitgutter update quicker
+set updatetime=100                                                       | " Help vim-gitgutter update quicker
 set previewheight=15
 set noswapfile                                                           | " No swap file
 set nobackup                                                             | " No backup
@@ -73,6 +73,8 @@ set incsearch                                                            | " Do 
 set number                                                               | " Always enable line numbers
 set nrformats-=octal                                                     | " Do not recognize octal numbers for Ctrl-A and Ctrl-X
 set lazyredraw                                                           | " lazy redraw by default
+set formatoptions+=lnw | " tcq (default)
+
 
 " ---------------------------------------------------------------
 " Leader
@@ -190,9 +192,15 @@ augroup END
 " This unsets the 'last search pattern' register by hitting return
 nnoremap <silent><cr> :nohlsearch<cr><cr>
 
+" Map <leader>p to paste from system clipboard
+nnoremap <leader>p :read !xsel -b<cr>
+
 " ---------------------------------------------------------------
 " Editing mappings
 " ---------------------------------------------------------------
+" Remap Vim 0 to first non-blank character
+map 0 ^
+
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk

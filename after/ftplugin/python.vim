@@ -6,6 +6,7 @@ setl tabstop=4
 setl softtabstop=0
 setl fileformat=unix
 setl expandtab
+setl nosmartindent
 setl linebreak
 setl smarttab
 setl nolisp
@@ -17,10 +18,6 @@ setl colorcolumn=88
 " @see jedi-vim issues #429
 " @see g:jedi#auto_vim_configuration
 setl completeopt-=longest
-
-" Prevent vim from removing indentation on python comments
-" https://stackoverflow.com/questions/2360249/
-inoremap # X<BS>#
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => wrapping
