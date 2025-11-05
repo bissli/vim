@@ -25,7 +25,6 @@ runtime plug.vim
 " ---------------------------------------------------------------
 " General config
 " ---------------------------------------------------------------
-set nocompatible                                                         | " disable legacy compatibility
 set encoding=utf-8                                                       | " Set utf8 as standard encoding
 set fileencoding=utf-8                                                   | " Set utf8 as standard encoding
 set fileformats=unix,dos,mac                                             | " Use Unix as the standard file type
@@ -46,16 +45,14 @@ set cmdheight=1                                                          | " Des
 set hidden                                                               | " Allow buffers to exist in the background
 set whichwrap+=<,>,h,l
 set backspace=indent,eol,start
-set magic                                                                | " re
 set ruler                                                                | " show the cursor position all the time
 set showmatch                                                            | " Briefly jump to a paren once it's balanced
 set matchtime=2                                                          | " (for only .2 seconds)
 set noerrorbells                                                         | " No sounds
 set novisualbell                                                         | " No sounds
-set belloff=all                                                          | " No sounds
-set t_vb=
+set belloff=all                                                          | " No sounds (covers t_vb)
 set ttimeout                                                             | " time out for key codes
-set timeoutlen=300                                                       | " Set a shorter timeout to reduce delay when typing j/k in insert mode
+set timeoutlen=500                                                       | " Set a shorter timeout to reduce delay when typing j/k in insert mode
 set ttimeoutlen=500                                                      | " Allows leader + multiple keystrokes
 set title                                                                | " Put title on top of Vim
 set splitbelow                                                           | " Default to splitting below, not above
@@ -323,7 +320,7 @@ endif
 
 " Format
 nnoremap <silent><leader>ja :ALEFix<cr>
-nnoremap <leader>jA :ALEToggle<cr>
+nnoremap <leader>jA :ALEToggle<cr>:echo "ALE is now: " . (g:ale_enabled ? "ENABLED" : "DISABLED")<cr>
 
 " Grep
 nnoremap <leader>jl :call GrepDoc()<cr>
