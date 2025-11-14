@@ -70,8 +70,6 @@ Plug 'preservim/vimux'
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown', 'aider'] }
 Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
-" Temp...
-Plug 'takac/vim-hardtime'
 
 call plug#end()
 

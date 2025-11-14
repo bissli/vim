@@ -122,6 +122,12 @@ if PlugLoaded('ale')
   let g:pep8_ignore = join(g:pep8_ignore_list, ',')
   let g:ale_python_autopep8_options = '--ignore '.pep8_ignore.' --aggressive --max-line-length 79'
 
+  function YapfFormatter(buffer) abort
+      return {
+      \   'command': 'yapf --style ~/.config/yapf/style'
+      \}
+  endfunction
+
   function PythonDocFormatter(buffer) abort
       return {
       \   'command': 'docformatter --black -'
@@ -140,6 +146,7 @@ if PlugLoaded('ale')
       \}
   endfunction
 
+  execute ale#fix#registry#Add('yapf_global', 'YapfFormatter', ['python'], 'yapf with global config')
   execute ale#fix#registry#Add('docformatter', 'PythonDocFormatter', ['python'], 'docformatter for python')
   execute ale#fix#registry#Add('sqlformat', 'SqlFormatFormatter', ['sql'], 'sqlformat formatter for sql')
 
