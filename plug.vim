@@ -8,9 +8,6 @@ call plug#begin(expand($HOME.'/.vim/plugged'))
 " general
 Plug 'bissli/inkpot'
 Plug 'rhysd/vim-healthcheck'
-if g:os == 'Linux'
-  Plug 'vim-scripts/colorsupport.vim'
-endif
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'sorribas/vim-close-duplicate-tabs'
 Plug 'preservim/tagbar'
