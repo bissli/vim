@@ -22,6 +22,7 @@ if PlugLoaded('vim-lsp')
   let g:lsp_settings_global_settings_dir = expand($HOME.'/.config/vim-lsp/')
   let g:lsp_settings_root_markers = ['.fzf', '.root']
   let g:lsp_settings_enable_suggestions = 0
+  let g:lsp_settings = {}
   " asyncomplete options
   let g:asyncomplete_auto_popup = 1
   let g:asyncomplete_auto_completeopt = 1
@@ -151,23 +152,27 @@ if PlugLoaded('vim-lsp')
   let directories=glob(fnameescape(g:lsp_settings_servers_dir).'/{,.}*/', 1, 1)
   call map(directories, 'fnamemodify(v:val, ":h:t")')
 
-  let g:lsp_settings_filetype_python = []
-  let g:lsp_settings_filetype_sql = []
-
   let g:jedi_language_server_path = g:lsp_settings_servers_dir . 'jedi-language-server/jedi-language-server'
-  let g:ruff_language_server_path = g:lsp_settings_servers_dir . 'ruff/ruff'
+  let g:ruff_language_server_path = g:lsp_settings_servers_dir . 'ruff-lsp/ruff-lsp'
   let g:sqls_language_server_path = g:lsp_settings_servers_dir . 'sqls/sqls'
 
-  if executable(g:ruff_language_server_path)
-      call add(g:lsp_settings_filetype_python, 'ruff')
+  " Only block auto-registration if we have servers to manually register
+  if executable(g:jedi_language_server_path) || executable(g:ruff_language_server_path)
+    let g:lsp_settings_filetype_python = ['__none__']
+  endif
+  if executable(g:sqls_language_server_path)
+    let g:lsp_settings_filetype_sql = ['__none__']
   endif
 
-  if index(directories, 'jedi-language-server') != -1
-    call add(g:lsp_settings_filetype_python, 'jedi-language-server~')
+  if executable(g:ruff_language_server_path)
+      au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff-lsp~',
+        \ 'cmd': {server_info->[g:ruff_language_server_path]},
+        \ 'allowlist': ['python'],
+        \ })
   endif
 
   if executable(g:jedi_language_server_path)
-      call add(g:lsp_settings_filetype_python, 'jedi-language-server~')
       au User lsp_setup call lsp#register_server({
         \ 'name': 'jedi-language-server~',
         \ 'cmd': {server_info->[g:jedi_language_server_path]},
@@ -184,7 +189,6 @@ if PlugLoaded('vim-lsp')
   endif
 
   if executable(g:sqls_language_server_path)
-    call add(g:lsp_settings_filetype_sql, 'sqls~')
     augroup LspSqls
 	autocmd!
 	autocmd User lsp_setup call lsp#register_server({
