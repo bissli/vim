@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+echo "=========================================="
+echo "Vim Setup Install Script"
+echo "=========================================="
+echo ""
+
+# Download vim-plug
+echo "[1/3] Downloading vim-plug..."
+AUTOLOAD_DIR="$HOME/.vim/autoload"
+mkdir -p "$AUTOLOAD_DIR"
+
+if [ -f "$AUTOLOAD_DIR/plug.vim" ]; then
+    echo "  vim-plug already exists, skipping download"
+else
+    curl -fLo "$AUTOLOAD_DIR/plug.vim" \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    echo "  vim-plug downloaded successfully"
+fi
+
+# Create session directory
+echo ""
+echo "[2/3] Creating session directory..."
+mkdir -p "$HOME/.vim/session"
+echo "  Session directory created: $HOME/.vim/session"
+
+# Install plugins
+echo ""
+echo "[3/3] Installing Vim plugins..."
+vim +PlugInstall! +qall
+
+echo ""
+echo "=========================================="
+echo "Installation complete!"
+echo "=========================================="
