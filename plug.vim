@@ -6,6 +6,7 @@ call platform#detect()
 call plug#begin(expand($HOME.'/.vim/plugged'))
 
 " general
+Plug 'editorconfig/editorconfig-vim'
 Plug 'bissli/inkpot'
 Plug 'rhysd/vim-healthcheck'
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
