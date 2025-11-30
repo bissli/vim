@@ -190,7 +190,11 @@ augroup END
 nnoremap <silent><cr> :nohlsearch<cr><cr>
 
 " Map <leader>p to paste from system clipboard
-nnoremap <leader>p :read !xsel -b<cr>
+if has('mac') || has('macunix')
+    nnoremap <leader>p :read !pbpaste<cr>
+else
+    nnoremap <leader>p :read !xsel -b<cr>
+endif
 
 " ---------------------------------------------------------------
 " Editing mappings
