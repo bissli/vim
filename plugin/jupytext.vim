@@ -211,6 +211,7 @@ let g:jupytext_enable = 1
 let g:jupytext_command = 'jupytext'
 let g:jupytext_to_ipynb_opts = '--to=ipynb --update'
 let g:jupytext_fmt = 'py:percent'
+let g:jupytext_tmpdir = '/tmp'
 
 
 function s:debugmsg(msg)
@@ -306,7 +307,12 @@ function s:get_jupytext_file(filename, fmt)
     let l:tail = fnamemodify(l:fileroot, ':t')
     " file extension from fmt
     let l:extension = s:jupytext_extension_map[a:fmt]
-    let l:jupytext_file = l:fileroot . "." . l:extension
+    " Use tmpdir if configured, otherwise use same directory as original file
+    if exists('g:jupytext_tmpdir') && !empty(g:jupytext_tmpdir)
+        let l:jupytext_file = g:jupytext_tmpdir . "/" . l:tail . "." . l:extension
+    else
+        let l:jupytext_file = l:fileroot . "." . l:extension
+    endif
     return l:jupytext_file
 endfunction
 
@@ -318,6 +324,7 @@ function s:write_to_ipynb() abort
     call s:debugmsg("Updating notebook from ".b:jupytext_file)
     let l:cmd = g:jupytext_command." --from=" . g:jupytext_fmt
     \         . " " . g:jupytext_to_ipynb_opts . " "
+    \         . "--output=" . shellescape(filename) . " "
     \         . shellescape(b:jupytext_file)
     call s:debugmsg("cmd: ".l:cmd)
     let l:output=system(l:cmd)
