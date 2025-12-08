@@ -66,3 +66,16 @@ augroup pep8textwidth
     au!
     autocmd CursorMoved,CursorMovedI * :if &ft == 'python' | :exe 'setlocal textwidth='.GetPythonTextWidth() | :endif
 augroup END
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => smart line join
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PythonSmartJoin()
+    normal! gvJ
+    let l:line = getline('.')
+    let l:cleaned = substitute(l:line, '\([({\[]\) ', '\1', 'g')
+    let l:cleaned = substitute(l:cleaned, ' \([]})]\)', '\1', 'g')
+    call setline('.', l:cleaned)
+endfunction
+
+xnoremap <buffer> <silent> J :<C-u>call PythonSmartJoin()<CR>
