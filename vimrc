@@ -190,11 +190,7 @@ augroup END
 nnoremap <silent><cr> :nohlsearch<cr><cr>
 
 " Map <leader>p to paste from system clipboard
-if has('mac') || has('macunix')
-    nnoremap <leader>p :read !pbpaste<cr>
-else
-    nnoremap <leader>p :read !xsel -b<cr>
-endif
+nnoremap <leader>p :read !eval "$(tmux show-env -s DISPLAY 2>/dev/null)" 2>/dev/null; xsel -b<cr>
 
 " ---------------------------------------------------------------
 " Editing mappings
