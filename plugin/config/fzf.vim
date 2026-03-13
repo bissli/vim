@@ -17,10 +17,13 @@ if PlugLoaded('fzf')
   augroup END
 
   let s:fzf_command_flags = [
-      \ "--smart-case ",
-      \ "--nogroup ",
       \ "--hidden ",
-      \ '--follow -l -m 50000 -g "" 2> /dev/null',
+      \ "--follow ",
+      \ "--no-ignore-global ",
+      \ "--glob '!.git' ",
+      \ "--glob '!__init__.py' ",
+      \ "--glob '!.claude/' ",
+      \ "2> /dev/null",
       \ ]
   let s:fzf_opts_flags = [
       \ "--extended ",
@@ -33,7 +36,7 @@ if PlugLoaded('fzf')
       \ "--preview 'bat --style=numbers --wrap never  --color=always --line-range :500 {}'",
       \ ]
 
-  let $FZF_DEFAULT_COMMAND = "ag " . join(s:fzf_command_flags)
+  let $FZF_DEFAULT_COMMAND = "rg --files " . join(s:fzf_command_flags)
   let $FZF_DEFAULT_OPTS=join(s:fzf_opts_flags)
 
   func! s:list_buffers()
