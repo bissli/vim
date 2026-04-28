@@ -42,4 +42,4 @@ func! TokenCountStatusSafe()
     return ''
 endfunc
 
-set statusline=\ %{HasPaste()}%f%m%r%h\ %w\ \ dir:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ %(\ %{VisualSelectionSize()}\ \ %{TokenCountStatusSafe()}%)
+set statusline=\ %{HasPaste()}[%f%m%r%h]%w\ [dir:\ %r%{getcwd()}%h]\ [Line:\ %l]%(\ [%{VisualSelectionSize()}]%)%(\ [%{TokenCountStatusSafe()}]%)
