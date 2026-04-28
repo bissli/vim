@@ -68,6 +68,8 @@ Plug 'preservim/vimux'
 " Slime
 Plug 'jpalardy/vim-slime', { 'for': ['python', 'r', 'markdown', 'aider'] }
 Plug 'hanschen/vim-ipython-cell', { 'for': ['python', 'r', 'markdown'] }
+" Token counter
+Plug 'bissli/vim-tokencount', { 'do': 'make build' }
 
 call plug#end()
 
