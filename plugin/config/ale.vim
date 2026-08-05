@@ -84,6 +84,7 @@ if PlugLoaded('ale')
     \ 'E123', 'Align closing bracket to match opening bracket.',
     \ 'E125', 'Indent to distinguish line from next logical line.',
     \ 'E126', 'Fix over-indented hanging indentation.',
+    \ 'E129', 'Reindent visually indented line with same indent as next logical line.',
     \ 'E20',  'Remove extraneous whitespace.',
     \ 'E201', 'Whitepace after [.',
     \ 'E203', 'Space before :.',
